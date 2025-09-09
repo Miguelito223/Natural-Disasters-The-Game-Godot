@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://daheu4r7g53ps"]
 
-[ext_resource type="Script" path="res://Scripts/loading_screen.gd" id="1_f6j85"]
+[ext_resource type="Script" uid="uid://bhqhxhn4v2cs2" path="res://Scripts/loading_screen.gd" id="1_f6j85"]
 [ext_resource type="Theme" uid="uid://cb8utilpq2brs" path="res://Resources/pause_and_menu_theme.tres" id="2_hioyu"]
 
 [sub_resource type="Animation" id="Animation_fabrc"]
@@ -64,9 +64,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0hyq3"]
 _data = {
-"RESET": SubResource("Animation_fabrc"),
-"fade_in": SubResource("Animation_oiyqs"),
-"fade_out": SubResource("Animation_a31nl")
+&"RESET": SubResource("Animation_fabrc"),
+&"fade_in": SubResource("Animation_oiyqs"),
+&"fade_out": SubResource("Animation_a31nl")
 }
 
 [node name="loading screen" type="CanvasLayer"]

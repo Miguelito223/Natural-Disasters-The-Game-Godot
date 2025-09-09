@@ -1,41 +1,18 @@
 extends CharacterBody3D
 
-@onready var wave = $CSGBox3D
-@onready var collision_wave = $CollisionShape3D
-@onready var area_wave_collision = $Area3D/CollisionShape3D
-
+@onready var tsunami = $tsunami
 var speed = 100
 var tsunami_strength = 100
-var tsunami_start_height = 1
-var tsunami_middle_height = 1000
-var tsunami_finish_height = 10
 var direction = Vector3(0, 0, 1)
-var current_height
 var distance_traveled = 0.0
 var total_distance = 4097.0  # Adjust this value based on your scene
-
-
-func _ready() -> void:
-	wave.size.y = tsunami_start_height
-	collision_wave.shape.size.y = wave.size.y
-	area_wave_collision.shape.size.y = wave.size.y
 
 func _physics_process(delta):
 	var distance_this_frame = speed * delta
 	distance_traveled += distance_this_frame
 	var displacement = direction * distance_this_frame
 
-	# Calculate current height based on distance traveled
-	current_height = calculate_height(distance_traveled)
-
-	# Update wave height
-	wave.size.y = current_height
-	collision_wave.shape.size.y = wave.size.y
-	area_wave_collision.shape.size.y = wave.size.y
-	
-	wave.size += displacement
-	collision_wave.shape.size = wave.size
-	area_wave_collision.shape.size = wave.size
+	position += displacement
 
 	move_and_slide()
 
@@ -50,14 +27,6 @@ func _physics_process(delta):
 		elif body.is_in_group("player"):
 			if not body.is_on_floor():
 				body.velocity = self.velocity
-
-func calculate_height(distance):
-	# Height increases up to a point and then decreases
-	if distance <= total_distance / 2:
-		return lerp(tsunami_start_height, tsunami_middle_height, distance / (total_distance / 2))
-	else:
-		return max(lerp(tsunami_middle_height, tsunami_finish_height, (distance - total_distance / 2) / (total_distance / 2)), 0)
-
 
 
 func _on_area_3d_body_entered(body: Node3D):

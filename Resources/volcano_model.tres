@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://diohginyx0ebc"]
+
+[ext_resource type="Texture2D" uid="uid://y6a31uwruqda" path="res://Textures/volcanic_rock_tiles_diff_4k.jpg" id="1_63382"]
+[ext_resource type="Texture2D" uid="uid://dnv0sugtplc16" path="res://Textures/volcanic_rock_tiles_nor_gl_4k.png" id="2_dsnj5"]
+
+[resource]
+albedo_texture = ExtResource("1_63382")
+normal_enabled = true
+normal_texture = ExtResource("2_dsnj5")

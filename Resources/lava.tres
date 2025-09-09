@@ -1,3 +1,9 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1333117841d89f8c7292139cc6896a37dc04d93b209d2531a7a1be888109f239
-size 263
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://jeft7exqnaro"]
+
+[ext_resource type="Texture2D" uid="uid://17dpy0y5mqkk" path="res://Textures/Stylized_Lava_001_basecolor.png" id="1_lee5p"]
+[ext_resource type="Texture2D" uid="uid://ch6r18q1hspho" path="res://Textures/Stylized_Lava_001_normal.png" id="2_0ldbq"]
+
+[resource]
+albedo_texture = ExtResource("1_lee5p")
+normal_enabled = true
+normal_texture = ExtResource("2_0ldbq")

@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://c0e7ifnoygvr6"]
 
-[ext_resource type="Script" path="res://addons/zylann.hterrain/tools/texture_editor/set_editor/texture_set_editor.gd" id="1"]
-[ext_resource type="Shader" path="res://addons/zylann.hterrain/tools/texture_editor/display_alpha.gdshader" id="2"]
-[ext_resource type="Shader" path="res://addons/zylann.hterrain/tools/texture_editor/display_color.gdshader" id="3"]
-[ext_resource type="PackedScene" path="res://addons/zylann.hterrain/tools/util/dialog_fitter.tscn" id="5"]
+[ext_resource type="Script" uid="uid://knvbtdj58m2j" path="res://addons/zylann.hterrain/tools/texture_editor/set_editor/texture_set_editor.gd" id="1"]
+[ext_resource type="Shader" uid="uid://dft1r6oebwisk" path="res://addons/zylann.hterrain/tools/texture_editor/display_alpha.gdshader" id="2"]
+[ext_resource type="Shader" uid="uid://dtcbcpkc7mbd2" path="res://addons/zylann.hterrain/tools/texture_editor/display_color.gdshader" id="3"]
+[ext_resource type="PackedScene" uid="uid://bnslbd52buwps" path="res://addons/zylann.hterrain/tools/util/dialog_fitter.tscn" id="5"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 shader = ExtResource("3")

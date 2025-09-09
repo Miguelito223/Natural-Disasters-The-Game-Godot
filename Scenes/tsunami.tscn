@@ -1,20 +1,13 @@
 [gd_scene load_steps=6 format=3 uid="uid://d3gkmhq5kjhrj"]
 
-[ext_resource type="Script" path="res://Scripts/Tsunami.gd" id="1_v7drw"]
-[ext_resource type="Shader" path="res://Shaders/tsunami.gdshader" id="2_nl4w6"]
+[ext_resource type="Script" uid="uid://bxbolk17xluu5" path="res://Scripts/Tsunami.gd" id="1_6j28r"]
+[ext_resource type="PackedScene" uid="uid://bd5or0vi27grb" path="res://Models/FBX Format/tsunami.fbx" id="2_khnsg"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_1y2fb"]
-size = Vector3(10000, 1000, 471)
+[sub_resource type="BoxShape3D" id="BoxShape3D_6j28r"]
+size = Vector3(518.306, 80.2877, 34.6135)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7xrna"]
-render_priority = 0
-shader = ExtResource("2_nl4w6")
-shader_parameter/WaveSpeed = 0.01
-shader_parameter/WaveIntensity = 0.2
-shader_parameter/WaveColor = Color(0, 1, 0.986607, 1)
-shader_parameter/WaterColor = Color(0, 0.169643, 1, 1)
-shader_parameter/FoamSize = 0.1
-shader_parameter/WaterOpacity = 0.4
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ektir"]
+data = PackedVector3Array(-259.449, 24.7491, 12.0507, 258.988, 29.1805, 12.0506, 259.138, 11.6667, 12.0506, 259.138, 11.6667, 12.0506, -259.3, 7.2354, 12.0507, -259.449, 24.7491, 12.0507, -259.3, 7.2354, -2.7182, -259.449, 24.7491, -2.7182, -259.449, 24.7491, 12.0507, -259.449, 24.7491, 12.0507, -259.3, 7.2354, 12.0507, -259.3, 7.2354, -2.7182, 259.138, 11.6667, -2.7184, 258.988, 29.1805, -2.7183, -259.449, 24.7491, -2.7182, -259.449, 24.7491, -2.7182, -259.3, 7.2354, -2.7182, 259.138, 11.6667, -2.7184, 258.988, 29.1805, 12.0506, 258.988, 29.1805, -2.7183, 259.138, 11.6667, -2.7184, 259.138, 11.6667, -2.7184, 259.138, 11.6667, 12.0506, 258.988, 29.1805, 12.0506, 259.587, -40.8746, 12.0505, 259.587, -40.8745, -23.0877, -258.85, -45.3059, -23.0875, -258.85, -45.3059, -23.0875, -258.85, -45.3059, 12.0507, 259.587, -40.8746, 12.0505, 258.909, 38.4978, -7.121, 258.988, 29.1805, 12.0506, -259.449, 24.7491, 12.0507, -259.449, 24.7491, 12.0507, -259.529, 34.0665, -7.1208, 258.909, 38.4978, -7.121, 258.909, 38.4978, -7.121, -259.529, 34.0665, -7.1208, -259.529, 34.0665, -21.8897, -259.529, 34.0665, -21.8897, 258.909, 38.4978, -21.8899, 258.909, 38.4978, -7.121, 258.909, 38.4978, -7.121, 258.909, 38.4978, -21.8899, 258.988, 29.1805, -2.7183, 258.988, 29.1805, -2.7183, 258.988, 29.1805, 12.0506, 258.909, 38.4978, -7.121, -259.529, 34.0665, -7.1208, -259.449, 24.7491, 12.0507, -259.449, 24.7491, -2.7182, -259.449, 24.7491, -2.7182, -259.529, 34.0665, -21.8897, -259.529, 34.0665, -7.1208, 258.909, 38.4978, -21.8899, -259.529, 34.0665, -21.8897, -259.449, 24.7491, -2.7182, -259.449, 24.7491, -2.7182, 258.988, 29.1805, -2.7183, 258.909, 38.4978, -21.8899, 259.437, -23.3608, 12.0505, 259.288, -5.847, 12.0505, 259.437, -23.3608, -2.7184, 259.437, -23.3608, -2.7184, 259.587, -40.8745, -23.0877, 259.437, -23.3608, 12.0505, 259.437, -23.3608, -2.7184, -259, -27.7921, -2.7182, -258.85, -45.3059, -23.0875, -258.85, -45.3059, -23.0875, 259.587, -40.8745, -23.0877, 259.437, -23.3608, -2.7184, -259, -27.7921, -2.7182, -259.15, -10.2784, 12.0507, -259, -27.7921, 12.0507, -259, -27.7921, 12.0507, -258.85, -45.3059, -23.0875, -259, -27.7921, -2.7182, -259.15, -10.2784, 12.0507, 259.288, -5.847, 12.0505, 259.437, -23.3608, 12.0505, 259.437, -23.3608, 12.0505, -259, -27.7921, 12.0507, -259.15, -10.2784, 12.0507, -258.85, -45.3059, 12.0507, -259, -27.7921, 12.0507, 259.437, -23.3608, 12.0505, 259.437, -23.3608, 12.0505, 259.587, -40.8746, 12.0505, -258.85, -45.3059, 12.0507, -258.85, -45.3059, -23.0875, -259, -27.7921, 12.0507, -258.85, -45.3059, 12.0507, 259.587, -40.8746, 12.0505, 259.437, -23.3608, 12.0505, 259.587, -40.8745, -23.0877, 259.288, -5.847, 12.0505, 259.138, 11.6667, 12.0506, 259.138, 11.6667, -2.7184, 259.138, 11.6667, -2.7184, 259.437, -23.3608, -2.7184, 259.288, -5.847, 12.0505, 259.437, -23.3608, -2.7184, 259.138, 11.6667, -2.7184, -259.3, 7.2354, -2.7182, -259.3, 7.2354, -2.7182, -259, -27.7921, -2.7182, 259.437, -23.3608, -2.7184, -259.3, 7.2354, -2.7182, -259.3, 7.2354, 12.0507, -259.15, -10.2784, 12.0507, -259.15, -10.2784, 12.0507, -259, -27.7921, -2.7182, -259.3, 7.2354, -2.7182, -259.3, 7.2354, 12.0507, 259.138, 11.6667, 12.0506, 259.288, -5.847, 12.0505, 259.288, -5.847, 12.0505, -259.15, -10.2784, 12.0507, -259.3, 7.2354, 12.0507)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_p2o80"]
 properties/0/path = NodePath(".:position")
@@ -30,25 +23,25 @@ properties/2/replication_mode = 1
 [node name="Tsunami" type="CharacterBody3D"]
 collision_layer = 4
 collision_mask = 4
-script = ExtResource("1_v7drw")
+script = ExtResource("1_6j28r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_1y2fb")
-disabled = true
+transform = Transform3D(1.00482, 0, 0, 0, 1.00482, 0, 0, 0, 1.00482, -1.5836, -4.69926, -4.29318)
+shape = SubResource("BoxShape3D_6j28r")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-size = Vector3(10000, 1000, 471)
-material = SubResource("ShaderMaterial_7xrna")
+[node name="tsunami" parent="." instance=ExtResource("2_khnsg")]
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 4
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("BoxShape3D_1y2fb")
+shape = SubResource("ConcavePolygonShape3D_ektir")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_p2o80")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+
+[editable path="tsunami"]

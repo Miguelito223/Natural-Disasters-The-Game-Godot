@@ -12,7 +12,6 @@ var earthquake_scene = preload("res://Scenes/earthquake.tscn")
 @export var IsPressureLeaking = false 
 @export var IsVolcanoAsh = false
 
-@onready var skeleton = $Volcano/ref_skeleton/Skeleton3D
 @onready var volcano = $Volcano
 @onready var volcano_area = $Volcano_Area
 

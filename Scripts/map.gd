@@ -69,13 +69,6 @@ func player_join(peer_id):
 		var player = player_scene.instantiate()
 		player.id = peer_id
 		player.name = str(peer_id)
-		
-		if OS.get_name() == "Web":
-			Globals.Websocket_local_peer = Globals.Websocket.get_peer(peer_id)
-		else:
-			Globals.Enet_local_peer = Globals.Enet.get_peer(peer_id)
-			if Globals.Enet_local_peer != null:
-				Globals.Enet_local_peer.set_timeout(60000, 300000, 600000)
 
 		if multiplayer.is_server():
 			print("syncring timer, map, player_list and weather/disasters in server")
@@ -208,8 +201,7 @@ func kick_player(player_name):
 
 func damage_player(player_name, damage):
 	for player2 in self.get_children():
-		
-			player2.damage(damage)
+		player2.damage(damage)
 					
 
 func sync_weather_and_disaster():
@@ -911,10 +903,4 @@ func is_storm():
 		Globals.points += 1
 		
 		break
-
-
-
-func _on_player_spawner_spawned(_node:Node) -> void:
-	print("Player spawner, id:",  _node.id)
-	_node._reset_player()
 

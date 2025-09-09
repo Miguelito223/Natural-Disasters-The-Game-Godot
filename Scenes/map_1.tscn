@@ -1,21 +1,21 @@
 [gd_scene load_steps=28 format=3 uid="uid://csivk4bmioako"]
 
-[ext_resource type="Script" path="res://Scripts/map.gd" id="1_xn4hm"]
-[ext_resource type="Shader" path="res://clouds.gdshader" id="2_sc6k1"]
-[ext_resource type="Script" path="res://Scripts/world_environment.gd" id="3_575xv"]
+[ext_resource type="Script" uid="uid://qrldb3mvolox" path="res://Scripts/map.gd" id="1_xn4hm"]
+[ext_resource type="Shader" uid="uid://4lxdfdreyjat" path="res://clouds.gdshader" id="2_sc6k1"]
+[ext_resource type="Script" uid="uid://bea103amee2fs" path="res://Scripts/world_environment.gd" id="3_575xv"]
 [ext_resource type="Texture2D" uid="uid://p56xwtihxq22" path="res://Sprites/dark-black-texture-with-beautiful-stars-vector.jpg" id="3_bukha"]
-[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="3_je8e7"]
-[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="5_sr3y7"]
-[ext_resource type="Resource" path="res://Data/data.hterrain" id="6_ipvnn"]
+[ext_resource type="Script" uid="uid://uyjwx55t6exd" path="res://addons/zylann.hterrain/hterrain.gd" id="3_je8e7"]
+[ext_resource type="Script" uid="uid://bw4xc3evjuel3" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="5_sr3y7"]
+[ext_resource type="Resource" uid="uid://butsxhw35emxq" path="res://Data/data.hterrain" id="6_ipvnn"]
 [ext_resource type="Texture2D" uid="uid://iwbot60sbjqm" path="res://Textures/texture-grass-field.jpg" id="8_n5486"]
-[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="9_smrgu"]
+[ext_resource type="Script" uid="uid://blswf5oy6pops" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="9_smrgu"]
 [ext_resource type="Texture2D" uid="uid://6jmdwj3vn6m0" path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" id="10_lmmy2"]
 [ext_resource type="Texture2D" uid="uid://b8j13f56alvd7" path="res://Sprites/clipart974730.png" id="10_ux663"]
 [ext_resource type="AudioStream" uid="uid://dm8qudq1y2lbp" path="res://Sounds/music/survival-metal-with-solo-109315.mp3" id="10_w1fny"]
 [ext_resource type="PackedScene" uid="uid://da8gu8hvvo54v" path="res://Scenes/hause.tscn" id="11_8ni8s"]
-[ext_resource type="Script" path="res://Scripts/Chat.gd" id="12_osvto"]
+[ext_resource type="Script" uid="uid://v57w2n30luys" path="res://Scripts/Chat.gd" id="12_osvto"]
 [ext_resource type="Theme" uid="uid://cb8utilpq2brs" path="res://Resources/pause_and_menu_theme.tres" id="14_fkpsg"]
-[ext_resource type="Script" path="res://Scripts/Warning Hud.gd" id="14_p61f1"]
+[ext_resource type="Script" uid="uid://5ehetmrvktdi" path="res://Scripts/Warning Hud.gd" id="14_p61f1"]
 [ext_resource type="Texture2D" uid="uid://66hhd27hjdj8" path="res://Icons/disasters.png" id="15_32db0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ihtyg"]
@@ -30,10 +30,10 @@ shader_parameter/horizon_color = Color(0, 0.7, 0.8, 1)
 shader_parameter/horizon_blur = 0.05
 shader_parameter/sun_color = Color(10, 8, 1, 1)
 shader_parameter/sun_sunset_color = Color(10, 0, 0, 1)
-shader_parameter/sun_size = 0.15
+shader_parameter/sun_size = 0.065
 shader_parameter/sun_blur = 0.01
 shader_parameter/moon_color = Color(0.560955, 0.560955, 0.560955, 1)
-shader_parameter/moon_size = 0.15
+shader_parameter/moon_size = 0.065
 shader_parameter/moon_blur = 0.1
 shader_parameter/clouds_edge_color = Color(0, 0.0274998, 0.55, 1)
 shader_parameter/clouds_top_color = Color(1, 1, 1, 1)
@@ -46,8 +46,8 @@ shader_parameter/clouds_cutoff = 0.3
 shader_parameter/clouds_fuzziness = 0.5
 shader_parameter/clouds_weight = 0.0
 shader_parameter/clouds_blur = 0.25
-shader_parameter/stars_speed = 1.0
 shader_parameter/stars_texture = ExtResource("3_bukha")
+shader_parameter/stars_speed = 1.0
 shader_parameter/overwritten_time = 0.0
 
 [sub_resource type="Sky" id="Sky_lk1p6"]
@@ -138,11 +138,11 @@ size = Vector3(10000, 100, 1)
 script = ExtResource("1_xn4hm")
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Scenes/player.tscn")
+_spawnable_scenes = PackedStringArray("uid://b2g31vrdy6c1x")
 spawn_path = NodePath("..")
 
 [node name="DisastersSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Scenes/earthquake.tscn", "res://Scenes/explosion.tscn", "res://Scenes/meteors.tscn", "res://Scenes/tornado.tscn", "res://Scenes/thunder.tscn", "res://Scenes/tsunami.tscn", "res://Scenes/Volcano.tscn")
+_spawnable_scenes = PackedStringArray("uid://w8budjn2m22a", "uid://doi73cvnxims6", "uid://c6xgmy3mkckea", "uid://tjhhsh3ck07n", "uid://dni5hbhwlxmdi", "uid://d3gkmhq5kjhrj", "uid://qf81iinh5hke")
 spawn_path = NodePath("..")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -211,9 +211,6 @@ gizmo_extents = 2.9
 [node name="Hause" parent="." instance=ExtResource("11_8ni8s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1184.2, 0.505142, 1012.02)
 freeze = true
-
-[node name="Destruction" parent="Hause" index="2" node_paths=PackedStringArray("shard_container")]
-shard_container = NodePath("../..")
 
 [node name="Chat" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -337,7 +334,6 @@ shape = SubResource("BoxShape3D_b68bb")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4095.09)
 shape = SubResource("BoxShape3D_t040d")
 
-[connection signal="spawned" from="PlayerSpawner" to="." method="_on_player_spawner_spawned"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Chat/Button" to="Chat" method="_on_button_pressed"]
 

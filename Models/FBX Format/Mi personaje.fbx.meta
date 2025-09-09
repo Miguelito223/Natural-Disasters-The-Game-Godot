@@ -1,0 +1,397 @@
+fileFormatVersion: 2
+guid: 3061682498c31aa44b1581e3c4e895f1
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brazos
+    second: {fileID: 2100000, guid: 3ba6e11e6f650bd4da6458f9ac6ec27a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cuerpo.001
+    second: {fileID: 2100000, guid: 3ba6e11e6f650bd4da6458f9ac6ec27a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Piernas
+    second: {fileID: 2100000, guid: 3ba6e11e6f650bd4da6458f9ac6ec27a, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 1
+    importConstraints: 1
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Esqueleto|idle
+      takeName: Esqueleto|idle
+      internalID: 8671736372461246439
+      firstFrame: 0
+      lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Esqueleto|Fall
+      takeName: Esqueleto|Fall
+      internalID: 313413654560050026
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Esqueleto|Walk
+      takeName: Esqueleto|Walk
+      internalID: 2900445124022534885
+      firstFrame: 0
+      lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Esqueleto|Swiming
+      takeName: Esqueleto|Swiming
+      internalID: 6222639099961172710
+      firstFrame: 0
+      lastFrame: 51
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Esqueleto|Jump
+      takeName: Esqueleto|Jump
+      internalID: 1564053463981402818
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: Mi personaje(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cuerpo
+      parentName: Mi personaje(Clone)
+      position: {x: -0.08410981, y: 3.6468108, z: -0.7407889}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Esqueleto
+      parentName: Mi personaje(Clone)
+      position: {x: -0.08410981, y: 0.50835586, z: -0.7407889}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: clumna1
+      parentName: Esqueleto
+      position: {x: -0, y: 0, z: -0.007608501}
+      rotation: {x: 0.5016547, y: 0.4983399, z: 0.49833992, w: 0.50165457}
+      scale: {x: 1, y: 1, z: 1}
+    - name: columna2
+      parentName: clumna1
+      position: {x: -0, y: 0.0073932335, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: clumna3
+      parentName: columna2
+      position: {x: -0, y: 0.0104305325, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hombro.d
+      parentName: clumna3
+      position: {x: -0, y: 0.006510807, z: 0}
+      rotation: {x: 0.71939766, y: 0.0000000015101378, z: -6.802452e-10, w: 0.69459844}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: brazo_superior.d
+      parentName: hombro.d
+      position: {x: 2.729696e-25, y: 0.007663543, z: -4.2840836e-10}
+      rotation: {x: -0.01381883, y: -0.000001018421, z: -0.00006910616, w: 0.9999045}
+      scale: {x: 1, y: 1, z: 1}
+    - name: brazo_inferior.d
+      parentName: brazo_superior.d
+      position: {x: 2.4629116e-11, y: 0.012048435, z: -3.1664968e-10}
+      rotation: {x: -0.0019646643, y: -0.00000007457164, z: 0.00006912381, w: 0.9999981}
+      scale: {x: 1, y: 1.0000005, z: 1.0000005}
+    - name: brazo_inferior.d_end
+      parentName: brazo_inferior.d
+      position: {x: -0, y: 0.012777469, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hombro.i
+      parentName: clumna3
+      position: {x: -0, y: 0.006510807, z: 0}
+      rotation: {x: -0.7179976, y: 0.0000000027960145, z: 0.0000000023604285, w: 0.6960456}
+      scale: {x: 1, y: 1, z: 1}
+    - name: brazo_superior.i
+      parentName: hombro.i
+      position: {x: 1.8094576e-27, y: 0.0072144233, z: 5.587935e-10}
+      rotation: {x: 0.008904607, y: -0.000000007087032, z: -0.000000021493738, w: 0.99996036}
+      scale: {x: 0.9999998, y: 1.0000004, z: 1.0000004}
+    - name: brazo_inferior.i
+      parentName: brazo_superior.i
+      position: {x: 8.137165e-10, y: 0.013535053, z: 8.9406965e-10}
+      rotation: {x: 0.002697577, y: 0.00000000229475, z: 0.000000035376722, w: 0.99999636}
+      scale: {x: 1.0000001, y: 1.0000008, z: 1.0000008}
+    - name: brazo_inferior.i_end
+      parentName: brazo_inferior.i
+      position: {x: -0, y: 0.0114238225, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: cuello
+      parentName: clumna3
+      position: {x: -0, y: 0.006510807, z: 0}
+      rotation: {x: -0.010125578, y: -0.000000031912364, z: -0.04782155, w: 0.99880457}
+      scale: {x: 0.99999976, y: 1.0000001, z: 1.0000001}
+    - name: cuello_end
+      parentName: cuello
+      position: {x: -0, y: 0.007840914, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: cadera.d
+      parentName: clumna1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.0036365872, y: 0.69913214, z: 0.7149744, w: -0.003555997}
+      scale: {x: 1.000001, y: 1.0000007, z: 1.0000007}
+    - name: pierna_superior.d
+      parentName: cadera.d
+      position: {x: -1.1341416e-12, y: 0.0038488638, z: 4.1787301e-10}
+      rotation: {x: -0.003593569, y: -0.7155845, z: 0.6985168, w: 0.00055669446}
+      scale: {x: 1.0000001, y: 1.0000021, z: 1.0000018}
+    - name: pierna_inferior.d
+      parentName: pierna_superior.d
+      position: {x: -3.6903655e-10, y: 0.021290438, z: -1.0477379e-10}
+      rotation: {x: 0.0054350537, y: 0.009442359, z: -0.009449319, w: 0.99989605}
+      scale: {x: 1, y: 1.0000011, z: 1.0000011}
+    - name: pierna_inferior.d_end
+      parentName: pierna_inferior.d
+      position: {x: -0, y: 0.013565132, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: cadera.i
+      parentName: clumna1
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7131698, y: 0.0059188344, z: 0.006022176, w: 0.7009405}
+      scale: {x: 1.0000004, y: 1.0000007, z: 1.0000007}
+    - name: pierna_superior.i
+      parentName: cadera.i
+      position: {x: -8.7908343e-13, y: 0.0032729637, z: 4.7152865e-10}
+      rotation: {x: 0.70604247, y: -0.0062179915, z: 0.02362369, w: -0.70774806}
+      scale: {x: 1.0000002, y: 1.0000012, z: 1.000001}
+    - name: pierna_inferior.i
+      parentName: pierna_superior.i
+      position: {x: 5.122274e-11, y: 0.02168717, z: -5.5879353e-11}
+      rotation: {x: 0.019470215, y: -0.021874698, z: 0.022041475, w: 0.9993281}
+      scale: {x: 1.0000001, y: 1, z: 1.000001}
+    - name: pierna_inferior.i_end
+      parentName: pierna_inferior.i
+      position: {x: -0, y: 0.013775431, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Brazos
+      parentName: Mi personaje(Clone)
+      position: {x: -0.07394093, y: 2.1371522, z: 0.89189243}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 29.687521, y: 100, z: 26.05744}
+    - name: Piernas
+      parentName: Mi personaje(Clone)
+      position: {x: -0.102632836, y: -2.2510388, z: -0.3063968}
+      rotation: {x: 0.9997414, y: -0.005922477, z: -0.020016769, w: 0.009025372}
+      scale: {x: 29.687521, y: 100, z: 26.057442}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

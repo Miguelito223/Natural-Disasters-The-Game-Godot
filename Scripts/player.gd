@@ -123,6 +123,8 @@ func _ready():
 		if not is_multiplayer_authority():
 			return
 
+	_reset_player()
+
 	Globals.local_player = self
 	
 	rain_node.emitting = false

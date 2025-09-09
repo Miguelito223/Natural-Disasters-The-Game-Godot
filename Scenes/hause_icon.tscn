@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d3nqv2bmoyl5d"]
 
-[ext_resource type="PackedScene" uid="uid://cm35toy86s52l" path="res://Scenes/hause.tscn" id="1_0ct46"]
+[ext_resource type="PackedScene" uid="uid://da8gu8hvvo54v" path="res://Scenes/hause.tscn" id="1_0ct46"]
 
 [node name="hause_icon" type="SubViewport"]
 render_target_update_mode = 4

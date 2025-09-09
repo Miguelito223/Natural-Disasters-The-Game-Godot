@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dgt85ocipcy31"]
+
+[ext_resource type="Texture2D" uid="uid://dss1bqqo02qe" path="res://Textures/dry_riverbed_rock_diff_4k.jpg" id="1_jhobo"]
+[ext_resource type="Texture2D" uid="uid://bt57oybqsabyp" path="res://Textures/dry_riverbed_rock_nor_gl_4k.png" id="2_bpj6p"]
+
+[resource]
+albedo_texture = ExtResource("1_jhobo")
+normal_enabled = true
+normal_texture = ExtResource("2_bpj6p")
