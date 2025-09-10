@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://tjhhsh3ck07n"]
+[gd_scene load_steps=11 format=3 uid="uid://tjhhsh3ck07n"]
 
 [ext_resource type="Texture2D" uid="uid://bevx5iyc2q82h" path="res://Sprites/kenney_particle_pack/smoke_01.png" id="1_inpw0"]
 [ext_resource type="Script" uid="uid://j204yflrwws4" path="res://Scripts/tornado.gd" id="1_yllgf"]
@@ -58,10 +58,7 @@ color = Color(0.309804, 0.196078, 0, 1)
 [sub_resource type="QuadMesh" id="QuadMesh_lgd8c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_peyem"]
-size = Vector3(30, 100, 30)
-
-[sub_resource type="Resource" id="Resource_ijm4g"]
-metadata/__load_path__ = "res://Sounds/disasters/environment/wind_shared/ef1_loop.wav"
+size = Vector3(30, 51.4131, 30)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_avyhx"]
 properties/0/path = NodePath(".:position")
@@ -97,12 +94,12 @@ draw_pass_1 = SubResource("QuadMesh_lgd8c")
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.2935, 0)
 shape = SubResource("BoxShape3D_peyem")
 
 [node name="RayCast" type="RayCast3D" parent="."]
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource("Resource_ijm4g")
 volume_db = 80.0
 autoplay = true
 max_distance = 1000.0

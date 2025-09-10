@@ -1,20 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://w8budjn2m22a"]
+[gd_scene load_steps=4 format=3 uid="uid://w8budjn2m22a"]
 
 [ext_resource type="Script" uid="uid://ditkenu13k7tc" path="res://Scripts/Earthquake.gd" id="1_we2cb"]
 [ext_resource type="AudioStream" uid="uid://ma7g5g3l2kqr" path="res://Sounds/disasters/earthquake/earthquake_weak.wav" id="3_u5jqd"]
 [ext_resource type="AudioStream" uid="uid://bpdx6h6i6fbdh" path="res://Sounds/disasters/earthquake/earthquake_strong.wav" id="4_t4mnf"]
 
-[sub_resource type="Resource" id="Resource_tlxi7"]
-metadata/__load_path__ = "res://Sounds/disasters/nature/earthquake.wav"
-
-[sub_resource type="Resource" id="Resource_4uh5r"]
-metadata/__load_path__ = "res://Sounds/disasters/earthquake/earthquake_aftershock.wav"
-
 [node name="Earthquake" type="Node3D"]
 script = ExtResource("1_we2cb")
 
 [node name="earquake_sound" type="AudioStreamPlayer" parent="."]
-stream = SubResource("Resource_tlxi7")
 
 [node name="earquake_start_sound_weak" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_u5jqd")
@@ -25,4 +18,3 @@ volume_db = 80.0
 max_distance = 1000.0
 
 [node name="earqueake_aftershot" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource("Resource_4uh5r")

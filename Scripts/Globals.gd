@@ -450,78 +450,43 @@ func _process(_delta):
 		
 
 func hostwithport(port_int):
+	var error = Enet.create_server(port_int)
+	if error == OK:
+		multiplayer.multiplayer_peer = Enet
+		multiplayer.allow_object_decoding = true
+		Enet_host = Enet.host
+		Enet_peers = Enet_host.get_peers()
+		if multiplayer.is_server():
+			is_networking = true
+			UPNP_setup()
+			main_menu.hide()
+			LoadScene.load_scene(null, "map")
+			multiplayer.connection_failed.connect(server_fail)
+			multiplayer.server_disconnected.connect(server_disconect)
+			multiplayer.connected_to_server.connect(server_connected)
 
-	if OS.get_name() == "Web":
-		var error = Websocket.create_server(port_int)
-		if error == OK:
-			multiplayer.multiplayer_peer = Websocket
-			multiplayer.allow_object_decoding = true
-			Websocket.handshake_timeout	= 60.0
-			if multiplayer.is_server():
-				is_networking = true
-				UPNP_setup()
-				main_menu.hide()
-				LoadScene.load_scene(null, "map")
-				multiplayer.connection_failed.connect(server_fail)
-				multiplayer.server_disconnected.connect(server_disconect)
-				multiplayer.connected_to_server.connect(server_connected)
-		else:
-			print("Fatal Error in server")
+			
 	else:
-		var error = Enet.create_server(port_int)
-		if error == OK:
-			multiplayer.multiplayer_peer = Enet
-			multiplayer.allow_object_decoding = true
-			Enet_host = Enet.host
-			Enet_peers = Enet_host.get_peers()
-			if multiplayer.is_server():
-				is_networking = true
-				UPNP_setup()
-				main_menu.hide()
-				LoadScene.load_scene(null, "map")
-				multiplayer.connection_failed.connect(server_fail)
-				multiplayer.server_disconnected.connect(server_disconect)
-				multiplayer.connected_to_server.connect(server_connected)
-
-				
-		else:
-			print("Fatal Error in server")
+		print("Fatal Error in server")
 
 
 func joinwithip(ip_str, port_int):
+	var error = Enet.create_client(ip_str, port_int)
+	if error == OK:
+		multiplayer.multiplayer_peer = Enet
+		multiplayer.allow_object_decoding = true
+		Enet_host = Enet.host
+		Enet_peers = Enet_host.get_peers()
+		if not multiplayer.is_server():
+			is_networking = true
+			main_menu.hide()
+			LoadScene.load_scene(null, "res://Scenes/main.tscn")
+			multiplayer.connection_failed.connect(server_fail)
+			multiplayer.server_disconnected.connect(server_disconect)
+			multiplayer.connected_to_server.connect(server_connected)
 
-	if OS.get_name() == "Web":
-		var error = Websocket.create_client("ws://" + ip_str + ":" + str(port_int))
-		if error == OK:
-			multiplayer.multiplayer_peer = Websocket
-			multiplayer.allow_object_decoding = true
-			Websocket.handshake_timeout	= 60.0
-			if not multiplayer.is_server():
-				is_networking = true
-				main_menu.hide()
-				LoadScene.load_scene(null, "res://Scenes/main.tscn")
-				multiplayer.connection_failed.connect(server_fail)
-				multiplayer.server_disconnected.connect(server_disconect)
-				multiplayer.connected_to_server.connect(server_connected)
-		else:
-			print("Fatal Error in client")
 	else:
-		var error = Enet.create_client(ip_str, port_int)
-		if error == OK:
-			multiplayer.multiplayer_peer = Enet
-			multiplayer.allow_object_decoding = true
-			Enet_host = Enet.host
-			Enet_peers = Enet_host.get_peers()
-			if not multiplayer.is_server():
-				is_networking = true
-				main_menu.hide()
-				LoadScene.load_scene(null, "res://Scenes/main.tscn")
-				multiplayer.connection_failed.connect(server_fail)
-				multiplayer.server_disconnected.connect(server_disconect)
-				multiplayer.connected_to_server.connect(server_connected)
-
-		else:
-			print("Fatal Error in client")
+		print("Fatal Error in client")
 
 func server_fail():
 	print("client disconected: failed to load")

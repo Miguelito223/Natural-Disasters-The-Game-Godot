@@ -6,8 +6,6 @@
 script = ExtResource("1_kp8fp")
 
 [node name="MapSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://csivk4bmioako")
 spawn_path = NodePath("..")
-spawn_limit = 1
 
 [connection signal="spawned" from="MapSpawner" to="." method="_on_map_spawner_spawned"]

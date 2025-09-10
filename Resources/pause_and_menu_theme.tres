@@ -1,3 +1,44 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c2297d9b252736de4a6b3b3244abc9dc99fa9d5a018329656af5afeefb6197b4
-size 765
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cb8utilpq2brs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bl0a7"]
+bg_color = Color(1, 0.462199, 0.103084, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfbw0"]
+bg_color = Color(1, 0.462199, 0.103084, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uccex"]
+bg_color = Color(0.882953, 0.388677, 1.92523e-06, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rpata"]
+bg_color = Color(1, 0.462199, 0.103084, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nrbn6"]
+bg_color = Color(1, 0.462199, 0.103084, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[resource]
+Button/constants/outline_size = 10
+Button/styles/normal = SubResource("StyleBoxFlat_bl0a7")
+Label/constants/outline_size = 10
+LineEdit/constants/outline_size = 10
+LineEdit/styles/normal = SubResource("StyleBoxFlat_bfbw0")
+Panel/styles/panel = SubResource("StyleBoxFlat_uccex")
+ProgressBar/constants/outline_size = 10
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_rpata")
+TextEdit/constants/outline_size = 10
+TextEdit/styles/normal = SubResource("StyleBoxFlat_nrbn6")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=1202 format=4 uid="uid://bxi02esjkbgma"]
 
-[ext_resource type="PackedScene" uid="uid://beixacf0xmoki" path="res://Models/Breakable hause.blend" id="1_mcvrf"]
+[ext_resource type="PackedScene" uid="uid://b410wmhh5ywm6" path="res://Models/Blend Format/Breakable hause.blend" id="1_mcvrf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dn26d"]
 resource_name = "Wall_material"

@@ -1,3 +1,8 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:ba43c048a9aee426c06f2d7bde54e9f0305739e9281da592275e0292653be4f5
-size 334
+[gd_resource type="GradientTexture1D" load_steps=2 format=3 uid="uid://ccekod24udoyv"]
+
+[sub_resource type="Gradient" id="Gradient_w0xb0"]
+offsets = PackedFloat32Array(0, 0.461039, 1)
+colors = PackedColorArray(1, 0.451763, 0.134836, 1, 0, 0, 0, 1, 0.344076, 0.344076, 0.344076, 1)
+
+[resource]
+gradient = SubResource("Gradient_w0xb0")

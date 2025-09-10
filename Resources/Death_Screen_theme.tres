@@ -1,3 +1,27 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a655a5d4064241d058a0c8cf9cd5df1054e1a75b50d012ec51d64edd8a0445bd
-size 1080
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://ctfcvmj6op0i5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fl112"]
+bg_color = Color(0.239216, 0.239216, 0.239216, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eh80v"]
+bg_color = Color(0.239216, 0.239216, 0.239216, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vet6l"]
+bg_color = Color(0.329412, 0.329412, 0.329412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_liw50"]
+bg_color = Color(0.239216, 0.239216, 0.239216, 1)
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pmu5p"]
+bg_color = Color(0.478431, 0.141176, 0.109804, 0.32549)
+
+[resource]
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/constants/outline_size = 10
+Button/styles/focus = SubResource("StyleBoxFlat_fl112")
+Button/styles/hover = SubResource("StyleBoxFlat_eh80v")
+Button/styles/normal = SubResource("StyleBoxFlat_vet6l")
+Button/styles/pressed = SubResource("StyleBoxFlat_liw50")
+Label/constants/outline_size = 10
+Panel/styles/panel = SubResource("StyleBoxFlat_pmu5p")

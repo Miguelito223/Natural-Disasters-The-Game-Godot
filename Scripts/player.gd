@@ -65,7 +65,7 @@ var min_bdradiation = 0
 @onready var label = $Name
 @onready var temp_effect = $Temp_Effect/ColorRect
 
-
+@onready var interactor = $head/Camera3D/Interactor
 
 
 func _enter_tree():
@@ -344,6 +344,13 @@ func _physics_process(delta):
 		animation_tree_node.set("parameters/conditions/is_walking", false)
 		animation_tree_node.set("parameters/conditions/is_idle", is_on_floor())
 
+	if interactor.is_colliding():
+		var target = interactor.get_collider()
+		if target != null and target.has_method("Interact"):
+			print("Press e to interact")
+
+			if Input.is_action_just_pressed("Interact"):
+				target.Interact()
 		
 	move_and_slide()
 
@@ -390,4 +397,3 @@ func _reset_player():
 
 
 	print("Finish Resetting player :D")
-
