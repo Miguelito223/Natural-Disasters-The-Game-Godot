@@ -94,7 +94,7 @@ func _run_command(cmd: String) -> void:
 		$TextEdit.scroll_vertical =  $TextEdit.get_line_height()
 		return
 
-	var result = expression.execute([], get_parent())
+	var result = expression.execute([], Globals)
 
 	if expression.has_execute_failed():
 		$TextEdit.text += expression.get_error_text() + "\n"

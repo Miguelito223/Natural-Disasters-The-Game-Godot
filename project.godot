@@ -25,7 +25,7 @@ buses/default_bus_layout="res://Resources/default_bus_layout.tres"
 
 [autoload]
 
-Globals="*res://Scripts/Globals.gd"
+Globals="*res://Scenes/globals.tscn"
 LoadScene="*res://Scripts/LoadScene.gd"
 UnloadScene="*res://Scripts/UnloadScene.gd"
 

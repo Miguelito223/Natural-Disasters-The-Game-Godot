@@ -7,5 +7,3 @@ script = ExtResource("1_kp8fp")
 
 [node name="MapSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("..")
-
-[connection signal="spawned" from="MapSpawner" to="." method="_on_map_spawner_spawned"]

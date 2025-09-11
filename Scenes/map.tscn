@@ -134,7 +134,7 @@ size = Vector3(0, 100, 10000)
 [sub_resource type="BoxShape3D" id="BoxShape3D_t040d"]
 size = Vector3(10000, 100, 1)
 
-[node name="map_1" type="Node3D"]
+[node name="map" type="Node3D"]
 script = ExtResource("1_xn4hm")
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
@@ -189,9 +189,6 @@ shader_params/u_instance_scale = null
 shader_params/u_roughness = null
 metadata/_editor_icon = ExtResource("10_lmmy2")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 60.0
-
 [node name="MapSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_8u7l0")
 
@@ -209,7 +206,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1201.83, 9.32904, 996.233)
 gizmo_extents = 2.9
 
 [node name="Hause" parent="." instance=ExtResource("11_8ni8s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1184.2, 0.505142, 1012.02)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1184.2, 1.30695, 1012.02)
 
 [node name="Chat" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -333,7 +330,7 @@ shape = SubResource("BoxShape3D_b68bb")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4095.09)
 shape = SubResource("BoxShape3D_t040d")
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Chat/Button" to="Chat" method="_on_button_pressed"]
 
 [editable path="Hause"]
+[editable path="Hause/hause"]

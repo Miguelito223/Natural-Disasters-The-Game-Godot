@@ -123,8 +123,6 @@ func _ready():
 		if not is_multiplayer_authority():
 			return
 
-	_reset_player()
-
 	Globals.local_player = self
 	
 	rain_node.emitting = false
@@ -273,9 +271,9 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		if IsInWater or IsInLava:
-			velocity.y = clampf(velocity.y - (Globals.gravity * mass * delta * swim_factor), -10000, swim_cap)
+			velocity.y = Globals.gravity * delta * swim_factor
 		else:
-			velocity.y -= Globals.gravity * mass * delta 
+			velocity.y -= Globals.gravity * delta 
 			fall_strength = velocity.y
 		
 	else:
@@ -289,28 +287,12 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("Jump"):
 		if is_on_floor():
 			velocity.y = JUMP_VELOCITY
-			animation_tree_node.set("parameters/conditions/is_jumping", true)
-		
-		if not is_on_floor():
-			animation_tree_node.set("parameters/conditions/is_jumping", true)
 
 		if IsInWater or IsInLava:
 			velocity.y += JUMP_VELOCITY
-			animation_tree_node.set("parameters/conditions/is_jumping", true)
-	else:
-		animation_tree_node.set("parameters/conditions/is_jumping", false)
+			
+	
 
-	if Input.is_action_pressed("Jump"):
-		if is_on_floor():
-			velocity.y = JUMP_VELOCITY
-			animation_tree_node.set("parameters/conditions/is_jumping", is_on_floor())
-
-		if IsInWater:
-			velocity.y += JUMP_VELOCITY
-			animation_tree_node.set("parameters/conditions/is_swiming", IsInWater)
-	else:
-		animation_tree_node.set("parameters/conditions/is_jumping", false)
-		animation_tree_node.set("parameters/conditions/is_swiming", IsInWater)
 
 	if Input.is_action_just_pressed("Flashligh"):
 		$head/Camera3D/SpotLight3D.visible = !$head/Camera3D/SpotLight3D.visible
@@ -336,13 +318,15 @@ func _physics_process(delta):
 		velocity.z = lerp(velocity.z, direction.z * SPEED, delta * 3.0)
 
 	animation_tree_node.set("parameters/conditions/is_falling", !is_on_floor())
+	animation_tree_node.set("parameters/conditions/is_jumping", velocity.y > 0 )
+	animation_tree_node.set("parameters/conditions/is_swiming", IsInWater or IsInLava)
+	animation_tree_node.set("parameters/conditions/is_idle", is_on_floor() and input_dir.x == 0 and input_dir.y == 0)
+	animation_tree_node.set("parameters/conditions/is_walking", is_on_floor() and input_dir.x != 0 or input_dir.y != 0)
+
+		
 	
-	if input_dir.x != 0 or input_dir.y != 0:
-		animation_tree_node.set("parameters/conditions/is_walking", true)
-		animation_tree_node.set("parameters/conditions/is_idle", false)
-	else:
-		animation_tree_node.set("parameters/conditions/is_walking", false)
-		animation_tree_node.set("parameters/conditions/is_idle", is_on_floor())
+
+
 
 	if interactor.is_colliding():
 		var target = interactor.get_collider()

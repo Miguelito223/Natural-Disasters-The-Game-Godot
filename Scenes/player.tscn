@@ -1245,7 +1245,7 @@ bones/4/parent = 3
 bones/4/rest = Transform3D(1, -0.000138256, 1.37828e-07, 0.000138199, 0.999618, 0.027635, -3.95847e-06, -0.027635, 0.999618, -6.4719e-17, 0.766354, -4.28408e-08)
 bones/4/enabled = true
 bones/4/position = Vector3(-6.4719e-17, 0.766354, -4.28408e-08)
-bones/4/rotation = Quaternion(0.65021, 0.0227372, -0.0208891, 0.759127)
+bones/4/rotation = Quaternion(0.642427, -0.115746, 0.106408, 0.750045)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/name = "brazo_inferior.d"
 bones/5/parent = 4
@@ -1266,7 +1266,7 @@ bones/7/parent = 6
 bones/7/rest = Transform3D(1, -2.40698e-19, 5.55226e-17, 1.22943e-18, 0.999841, -0.0178084, -5.55095e-17, 0.0178084, 0.999841, -3.88342e-17, 0.721442, 5.58794e-08)
 bones/7/enabled = true
 bones/7/position = Vector3(-3.88342e-17, 0.721442, 5.58794e-08)
-bones/7/rotation = Quaternion(-0.638522, 0.0632093, 0.0561821, 0.764943)
+bones/7/rotation = Quaternion(-0.629914, -0.137295, -0.122032, 0.75463)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/name = "brazo_inferior.i"
 bones/8/parent = 7
@@ -1294,14 +1294,14 @@ bones/11/parent = 10
 bones/11/rest = Transform3D(-0.999974, -0.00436537, 0.00581706, -0.00592073, 0.0241228, -0.999691, 0.0042237, -0.999699, -0.024148, 1.27966e-10, 0.384886, 4.17949e-08)
 bones/11/enabled = true
 bones/11/position = Vector3(1.27966e-10, 0.384886, 4.17949e-08)
-bones/11/rotation = Quaternion(-0.0416315, 0.711877, -0.697588, -0.0697798)
+bones/11/rotation = Quaternion(-0.161285, 0.687489, -0.676836, -0.20794)
 bones/11/scale = Vector3(1, 1, 1)
 bones/12/name = "pierna_inferior.d"
 bones/12/parent = 11
 bones/12/rest = Transform3D(0.999643, -0.0189994, -0.01878, 0.0187942, 0.999762, -0.0110474, 0.0189855, 0.0106905, 0.999763, -1.04774e-09, 2.12904, -1.33368e-08)
 bones/12/enabled = true
 bones/12/position = Vector3(-1.04774e-09, 2.12904, -1.33368e-08)
-bones/12/rotation = Quaternion(0.00546607, -0.0113217, -0.0518684, 0.998575)
+bones/12/rotation = Quaternion(0.00536329, -0.0125069, -0.0992091, 0.994974)
 bones/12/scale = Vector3(1, 1, 1)
 bones/13/name = "cadera.i"
 bones/13/parent = 0
@@ -1315,14 +1315,14 @@ bones/14/parent = 13
 bones/14/rest = Transform3D(0.998807, -0.0246589, -0.0421602, 0.0422196, 0.00189155, 0.999107, -0.0245572, -0.999694, 0.0029304, 5.90433e-10, 0.327296, 4.71613e-08)
 bones/14/enabled = true
 bones/14/position = Vector3(5.90433e-10, 0.327296, 4.71613e-08)
-bones/14/rotation = Quaternion(-0.707117, 0.028958, 0.091503, 0.700553)
+bones/14/rotation = Quaternion(-0.681803, 0.15905, 0.244333, 0.670932)
 bones/14/scale = Vector3(1, 1, 1)
 bones/15/name = "pierna_inferior.i"
 bones/15/parent = 14
 bones/15/rest = Transform3D(0.998071, 0.0449051, 0.0428617, -0.0432015, 0.99827, -0.0398786, -0.0445783, 0.03795, 0.998285, -4.19095e-09, 2.16872, -9.31323e-09)
 bones/15/enabled = true
 bones/15/position = Vector3(-4.19095e-09, 2.16872, -9.31323e-09)
-bones/15/rotation = Quaternion(0.0173396, 0.00916626, -0.0790891, 0.996675)
+bones/15/rotation = Quaternion(0.0160144, 0.000644078, -0.125255, 0.991995)
 bones/15/scale = Vector3(1, 1, 1)
 
 [node name="Brazos" type="MeshInstance3D" parent="Esqueleto/Skeleton3D"]
@@ -1341,7 +1341,6 @@ skin = SubResource("Skin_fkd4q")
 surface_material_override/0 = SubResource("StandardMaterial3D_j2a2j")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("")
 libraries = {
 &"": SubResource("AnimationLibrary_o530v")
 }

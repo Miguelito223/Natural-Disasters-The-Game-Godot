@@ -3,8 +3,6 @@ extends CanvasLayer
 @onready var player = get_parent()
 var NextHeartSoundTime = Time.get_unix_time_from_system()
 
-var GlobalsData: DataResource = DataResource.load_file()
-
 func _process(_delta):
 
 	if Globals.is_networking:
@@ -19,7 +17,7 @@ func _process(_delta):
 	if get_parent().hearth <= 0:
 		freq = 0.05
 
-	if GlobalsData.FPS:
+	if Globals.GlobalsData.FPS:
 		$FPS.visible = true
 	else:
 		$FPS.visible = false

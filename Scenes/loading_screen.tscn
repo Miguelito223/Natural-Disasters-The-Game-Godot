@@ -77,7 +77,7 @@ script = ExtResource("1_f6j85")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 process_mode = 3
 libraries = {
-"": SubResource("AnimationLibrary_0hyq3")
+&"": SubResource("AnimationLibrary_0hyq3")
 }
 autoplay = "fade_in"
 

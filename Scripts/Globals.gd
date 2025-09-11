@@ -1,70 +1,77 @@
 extends Node
 
 #Network
-var ip = "127.0.0.1"
-var port = 9999
-var points = 0
-var username = ""
-var players_conected_array = []
-var players_conected_list = {}
-var players_conected_int = players_conected_list.size()
-var Enet = ENetMultiplayerPeer.new()
-var Offline = OfflineMultiplayerPeer.new()
-var Websocket = WebSocketMultiplayerPeer.new()
-var Enet_host: ENetConnection
-var Enet_local_peer: ENetPacketPeer
-var Websocket_local_peer: WebSocketPeer
-var Enet_peers
-var is_networking = false
+@export var ip = "127.0.0.1"
+@export var port = 9999
+@export var points = 0
+@export var username = ""
+@export var players_conected_array = []
+@export var players_conected_list = {}
+@export var players_conected_int = players_conected_list.size()
+@export var is_networking = false
+var enetMultiplayerpeer: ENetMultiplayerPeer
+
 
 #Globals Weather
-var Temperature: float = 23
-var pressure: float = 10000
-var oxygen: float  = 100
-var bradiation: float = 0
-var Humidity: float = 25
-var Wind_Direction: Vector3 = Vector3(1,0,0)
-var Wind_speed: float = 0
-var is_raining: bool = false
+@export var Temperature: float = 23
+@export var pressure: float = 10000
+@export var oxygen: float  = 100
+@export var bradiation: float = 0
+@export var Humidity: float = 25
+@export var Wind_Direction: Vector3 = Vector3(1,0,0)
+@export var Wind_speed: float = 0
+@export var is_raining: bool = false
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 #Globals Time
-var time:float = 0.0
-var Day:int = 0
-var Hour:int = 0
-var Minute:int = 00
+@export var time: float = 0.0
+@export var Day: int = 0
+@export var Hour: int = 0
+@export var Minute: int = 00
 
 #Globals Weather target
-var Temperature_target: float = 23
-var pressure_target: float = 10000
-var oxygen_target: float = 100
-var bradiation_target: float = 0
-var Humidity_target: float = 25
-var Wind_Direction_target: Vector3 = Vector3(1,0,0)
-var Wind_speed_target: float = 0
+@export var Temperature_target: float = 23
+@export var pressure_target: float = 10000
+@export var oxygen_target: float = 100
+@export var bradiation_target: float = 0
+@export var Humidity_target: float = 25
+@export var Wind_Direction_target: Vector3 = Vector3(1,0,0)
+@export var Wind_speed_target: float = 0
 
 #Globals Weather original
-var Temperature_original: float = 23
-var pressure_original: float = 10000
-var oxygen_original: float = 100
-var bradiation_original: float = 0
-var Humidity_original: float = 25
-var Wind_Direction_original: Vector3 = Vector3(1,0,0)
-var Wind_speed_original: float = 0
+@export var Temperature_original: float = 23
+@export var pressure_original: float = 10000
+@export var oxygen_original: float = 100
+@export var bradiation_original: float = 0
+@export var Humidity_original: float = 25
+@export var Wind_Direction_original: Vector3 = Vector3(1,0,0)
+@export var Wind_speed_original: float = 0
 
-var seconds = Time.get_unix_time_from_system()
+@export var seconds = Time.get_unix_time_from_system()
 
-var main
-var main_menu
-var map
-var local_player
+@export var main: Node3D
+@export var main_menu: Control
+@export var map: Node3D
+@export var local_player: CharacterBody3D
 
-var main_scene = preload("res://Scenes/main.tscn")
-var map_scene = preload("res://Scenes/map_1.tscn")
-var player_scene = preload("res://Scenes/player.tscn")
+@export var bounding_radius_areas = {}
 
-	
-var bounding_radius_areas = {}
+@export var player_scene = preload("res://Scenes/player.tscn")
+
+@export var started = false
+@export var GlobalsData: DataResource = DataResource.load_file()
+
+@export var current_weather_and_disaster = "Sun"
+@export var current_weather_and_disaster_int = 0
+
+@export var linghting_scene = preload("res://Scenes/thunder.tscn")
+@export var meteor_scene = preload("res://Scenes/meteors.tscn")
+@export var tornado_scene = preload("res://Scenes/tornado.tscn")
+@export var tsunami_scene = preload("res://Scenes/tsunami.tscn")
+@export var volcano_scene = preload("res://Scenes/Volcano.tscn")
+@export var earthquake_scene = preload("res://Scenes/earthquake.tscn")
+
+@onready var timer = $Timer
 
 func convert_MetoSU(metres):
 	return (metres * 39.37) / 0.75
@@ -326,195 +333,45 @@ func hit_chance(chance: int) -> bool:
 		return randf() < (clamp(chance * get_physics_multiplier(), 0, 100) / 100)
 	
 
-@rpc("any_peer", "call_local")
-func sync_timer(timer_int: int) -> void:
-	if map == null:
-		return
-
-	print("syncring timer...")
-	map.timer.stop()
-	map.timer.wait_time = timer_int
-	map.timer.start()
-
-@rpc("any_peer", "call_local")
-func add_player_to_list(id, player):
-	players_conected_array.append(player)
-	players_conected_list[id] = player
-	players_conected_int = players_conected_array.size()
-
-@rpc("any_peer", "call_local")
-func remove_player_to_list(id, player):
-	players_conected_array.erase(player)
-	players_conected_list.erase(id)
-	players_conected_int = players_conected_array.size()
-
-
-@rpc("any_peer", "call_local")
-func sync_points(new_value):
-	points = new_value
-
-@rpc("any_peer", "call_local")
-func sync_temp(new_value):
-	Temperature = new_value
-
-@rpc("any_peer", "call_local")
-func sync_humidity(new_value):
-	pressure = new_value
-
-@rpc("any_peer", "call_local")
-func sync_pressure(new_value):
-	pressure = new_value
-
-@rpc("any_peer", "call_local")
-func sync_oxygen(new_value):
-	oxygen = new_value
-
-@rpc("any_peer", "call_local")
-func sync_bradiation(new_value):
-	bradiation = new_value
-
-@rpc("any_peer", "call_local")
-func sync_wind_speed(new_value):
-	Wind_speed = new_value
-
-@rpc("any_peer", "call_local")
-func sync_Wind_Direction(new_value):
-	Wind_Direction = new_value
-
-@rpc("any_peer", "call_local")
-func _sync_time(time_value):
-	time = time_value
-
-@rpc("any_peer", "call_local")
-func _sync_day(day_value):
-	Day = day_value
-
-@rpc("any_peer", "call_local")
-func _sync_hour(hour_value):
-	Hour = hour_value
-
-@rpc("any_peer", "call_local")
-func _sync_minute(minute_value):
-	Minute = minute_value
-
-
-func _process(_delta):
-	
-	if not is_networking:
-		Temperature = clamp(Temperature, -275.5, 275.5)
-		Humidity = clamp(Humidity, 0, 100)
-		bradiation = clamp(bradiation, 0, 100)
-		pressure = clamp(pressure , 0, 100000)
-		oxygen = clamp(oxygen, 0, 100)
-		points = clamp(points, 0, 5000)
-
-		Temperature = lerp(Temperature, Temperature_target, 0.005)
-		Humidity = lerp(Humidity, Humidity_target, 0.005)
-		bradiation = lerp(bradiation, bradiation_target, 0.005)
-		pressure = lerp(pressure, pressure_target, 0.005)
-		oxygen = lerp(oxygen, oxygen_target, 0.005)
-		Wind_Direction = lerp(Wind_Direction, Wind_Direction_target, 0.005)
-		Wind_speed = lerp(Wind_speed, Wind_speed_target, 0.005)
-	else:
-
-		if multiplayer.is_server():
-			Temperature = clamp(Temperature, -275.5, 275.5)
-			Humidity = clamp(Humidity, 0, 100)
-			bradiation = clamp(bradiation, 0, 100)
-			pressure = clamp(pressure , 0, 100000)
-			oxygen = clamp(oxygen, 0, 100)
-			points = clamp(points, 0, 5000)
-
-			Temperature = lerp(Temperature, Temperature_target, 0.005)
-			Humidity = lerp(Humidity, Humidity_target, 0.005)
-			bradiation = lerp(bradiation, bradiation_target, 0.005)
-			pressure = lerp(pressure, pressure_target, 0.005)
-			oxygen = lerp(oxygen, oxygen_target, 0.005)
-			Wind_Direction = lerp(Wind_Direction, Wind_Direction_target, 0.005)
-			Wind_speed = lerp(Wind_speed, Wind_speed_target, 0.005)
-			
-			sync_temp.rpc(Temperature)
-			sync_humidity.rpc(Humidity)
-			sync_wind_speed.rpc(Wind_speed)
-			sync_Wind_Direction.rpc(Wind_Direction)
-			sync_pressure.rpc(pressure)
-			sync_oxygen.rpc(oxygen)
-			sync_bradiation.rpc(bradiation)
-			sync_points.rpc(points)
-			_sync_time.rpc(time)
-			_sync_day.rpc(Day)
-			_sync_hour.rpc(Hour)
-			_sync_minute.rpc(Minute)
-		
-
-		
-
 func hostwithport(port_int):
-	var error = Enet.create_server(port_int)
+	enetMultiplayerpeer = ENetMultiplayerPeer.new()
+	var error = enetMultiplayerpeer.create_server(port_int)
 	if error == OK:
-		multiplayer.multiplayer_peer = Enet
+		multiplayer.multiplayer_peer = enetMultiplayerpeer
 		multiplayer.allow_object_decoding = true
-		Enet_host = Enet.host
-		Enet_peers = Enet_host.get_peers()
 		if multiplayer.is_server():
 			is_networking = true
 			UPNP_setup()
-			main_menu.hide()
-			LoadScene.load_scene(null, "map")
-			multiplayer.connection_failed.connect(server_fail)
-			multiplayer.server_disconnected.connect(server_disconect)
-			multiplayer.connected_to_server.connect(server_connected)
-
-			
+			LoadScene.load_scene(main_menu, "map")
 	else:
 		print("Fatal Error in server")
 
 
 func joinwithip(ip_str, port_int):
-	var error = Enet.create_client(ip_str, port_int)
+	enetMultiplayerpeer = ENetMultiplayerPeer.new()
+	var error = enetMultiplayerpeer.create_client(ip_str, port_int)
 	if error == OK:
-		multiplayer.multiplayer_peer = Enet
+		multiplayer.multiplayer_peer = enetMultiplayerpeer
 		multiplayer.allow_object_decoding = true
-		Enet_host = Enet.host
-		Enet_peers = Enet_host.get_peers()
 		if not multiplayer.is_server():
 			is_networking = true
-			main_menu.hide()
-			LoadScene.load_scene(null, "res://Scenes/main.tscn")
-			multiplayer.connection_failed.connect(server_fail)
-			multiplayer.server_disconnected.connect(server_disconect)
-			multiplayer.connected_to_server.connect(server_connected)
-
+			UnloadScene.unload_scene(main_menu)
 	else:
 		print("Fatal Error in client")
 
 func server_fail():
 	print("client disconected: failed to load")
 	is_networking = false
-	Temperature_target = Temperature_original
-	Humidity_target = Humidity_original
-	pressure_target = pressure_original
-	Wind_Direction_target = Wind_Direction_original
-	Wind_speed_target = Wind_speed_original
 	players_conected_array.clear()
 	players_conected_int = players_conected_array.size()
-	multiplayer.multiplayer_peer = Offline
-	UnloadScene.unload_scene(map)
-	main_menu.show()
+	LoadScene.load_scene(map, "res://Scenes/main_menu.tscn")
 	
 func server_disconect():
 	print("client disconected")
 	is_networking = false
-	Temperature_target = Temperature_original
-	Humidity_target = Humidity_original
-	pressure_target = pressure_original
-	Wind_Direction_target = Wind_Direction_original
-	Wind_speed_target = Wind_speed_original
 	players_conected_array.clear()
 	players_conected_int = players_conected_array.size()
-	multiplayer.multiplayer_peer = Offline
-	UnloadScene.unload_scene(map)
-	main_menu.show()
+	LoadScene.load_scene(map, "res://Scenes/main_menu.tscn")
 
 
 func server_connected():
@@ -543,8 +400,41 @@ func UPNP_setup():
 		print("UPNP port TCP mapping failed")
 		return
 
+
+func _exit_tree() -> void:
+	multiplayer.peer_connected.disconnect(player_join)
+	multiplayer.peer_disconnected.disconnect(player_disconect)
+	multiplayer.server_disconnected.disconnect(server_disconect)
+	multiplayer.connected_to_server.disconnect(server_connected)
+	multiplayer.connection_failed.disconnect(server_fail)
+
+func _process(_delta):
+	if is_networking:
+		if not multiplayer.is_server(): 
+			return
+
+	
+	Temperature = clamp(Temperature, -275.5, 275.5)
+	Humidity = clamp(Humidity, 0, 100)
+	bradiation = clamp(bradiation, 0, 100)
+	pressure = clamp(pressure , 0, 100000)
+	oxygen = clamp(oxygen, 0, 100)
+
+	Temperature = lerp(Temperature, Temperature_target, 0.005)
+	Humidity = lerp(Humidity, Humidity_target, 0.005)
+	bradiation = lerp(bradiation, bradiation_target, 0.005)
+	pressure = lerp(pressure, pressure_target, 0.005)
+	oxygen = lerp(oxygen, oxygen_target, 0.005)
+	Wind_Direction = lerp(Wind_Direction, Wind_Direction_target, 0.005)
+	Wind_speed = lerp(Wind_speed, Wind_speed_target, 0.005)
+
 func _ready():
-	Offline = OfflineMultiplayerPeer.new()
+	multiplayer.peer_connected.connect(player_join)
+	multiplayer.peer_disconnected.connect(player_disconect)
+	multiplayer.server_disconnected.connect(server_disconect)
+	multiplayer.connected_to_server.connect(server_connected)
+	multiplayer.connection_failed.connect(server_fail)
+
 
 	if OS.has_feature("dedicated_server") or "s" in OS.get_cmdline_user_args() or "server" in OS.get_cmdline_user_args():
 		var args = OS.get_cmdline_user_args()
@@ -560,5 +450,268 @@ func _ready():
 		await get_tree().create_timer(2).timeout
 
 		hostwithport(port)
-
 	
+@rpc("any_peer", "call_local")
+func add_player_to_list(id, player):
+	players_conected_array.append(player)
+	players_conected_list[id] = player
+	players_conected_int = players_conected_array.size()
+
+@rpc("any_peer", "call_local")
+func remove_player_to_list(id, player):
+	players_conected_array.erase(player)
+	players_conected_list.erase(id)
+	players_conected_int = players_conected_array.size()
+
+func player_join(peer_id):
+	if Globals.is_networking:
+		if not multiplayer.is_server():
+			return 
+			
+	print("Joined player id: " + str(peer_id))
+	var player = player_scene.instantiate()
+	player.id = peer_id
+	player.name = str(peer_id)
+
+	print("syncring timer, map, player_list and weather/disasters in server")
+	var player_host = get_node(str(multiplayer.get_unique_id()))
+	if player_host != null and player_host != player:
+		add_player_to_list.rpc_id(peer_id, multiplayer.get_unique_id(), player_host)
+
+	add_player_to_list.rpc(peer_id, player)
+
+	if players_conected_int >= 2 and started == false:
+		started = true
+	elif players_conected_int < 2 and started == true:
+		started = false
+	elif players_conected_int >= 2 and started == true:
+		started = true
+	else:
+		started = false
+
+	set_weather_and_disaster.rpc_id(peer_id, current_weather_and_disaster_int)
+
+	if map and is_instance_valid(map):
+		map.add_child(player, true)
+		print("finish :D")
+
+
+func player_join_singleplayer():
+	var player = player_scene.instantiate()
+	player.id = 1
+	player.name = str(1)
+	map.add_child(player, true)
+
+
+func player_disconect(peer_id):
+	if Globals.is_networking:
+		if not multiplayer.is_server():
+			return 
+
+	var player = get_node(str(peer_id))
+	if is_instance_valid(player):
+		print("Disconected player id: " + str(peer_id))
+		if multiplayer.is_server():
+			print("syncring timer, map, player_list and weather/disasters in server")
+			remove_player_to_list.rpc(peer_id, player)
+
+			if players_conected_int >= 2 and started == false:
+				started = true
+			elif players_conected_int < 2 and started == true:
+				started = false
+			elif players_conected_int >= 2 and started == true:
+				started = true
+			else:
+				started = false
+
+			player.queue_free()
+
+			print("finish :D")
+
+
+
+func sync_weather_and_disaster():
+	if Globals.is_networking:
+		if multiplayer.is_server():
+			var random_weather_and_disaster = randi_range(0,12)
+			set_weather_and_disaster.rpc(random_weather_and_disaster)
+	else:
+		var random_weather_and_disaster = randi_range(0,12)
+		set_weather_and_disaster(random_weather_and_disaster)		
+
+@rpc("any_peer", "call_local")
+func set_weather_and_disaster(weather_and_disaster_index):
+	match weather_and_disaster_index:
+		0:
+			current_weather_and_disaster = "Sun"
+			current_weather_and_disaster_int = 0
+			if is_instance_valid(map):
+				map.is_sun()
+		1:
+			current_weather_and_disaster = "Cloud"
+			current_weather_and_disaster_int = 1
+			if is_instance_valid(map):
+				map.is_cloud()
+		2:
+			current_weather_and_disaster = "Raining"
+			current_weather_and_disaster_int = 2
+			if is_instance_valid(map):
+				map.is_raining()
+		3:
+			current_weather_and_disaster = "Storm"
+			current_weather_and_disaster_int = 3
+			if is_instance_valid(map):
+				map.is_storm()
+		4:
+			current_weather_and_disaster = "Linghting storm"
+			current_weather_and_disaster_int = 4
+			if is_instance_valid(map):
+				map.is_linghting_storm()
+
+		5:
+			current_weather_and_disaster = "Tsunami"
+			current_weather_and_disaster_int = 5
+			if is_instance_valid(map):
+				map.is_tsunami()
+
+		6:
+			current_weather_and_disaster = "Meteor shower"
+			current_weather_and_disaster_int = 6
+			if is_instance_valid(map):
+				map.is_meteor_shower()
+		7:
+			current_weather_and_disaster = "Volcano"
+			current_weather_and_disaster_int = 7
+			if is_instance_valid(map):
+				map.is_volcano()
+		8:
+			current_weather_and_disaster = "Tornado"
+			current_weather_and_disaster_int = 8
+			if is_instance_valid(map):
+				map.is_tornado()
+		9:
+			current_weather_and_disaster = "Acid rain"
+			current_weather_and_disaster_int = 9
+			map.is_acid_rain()
+		10:
+			current_weather_and_disaster = "Earthquake"
+			current_weather_and_disaster_int = 10
+			if is_instance_valid(map):
+				map.is_earthquake()
+
+		11:
+			current_weather_and_disaster = "Sand Storm"
+			current_weather_and_disaster_int = 11
+			if is_instance_valid(map):
+				map.is_sandstorm()
+		12:
+			current_weather_and_disaster = "blizzard"
+			current_weather_and_disaster_int = 12
+			if is_instance_valid(map):
+				map.is_blizzard()
+
+		"Sun":
+			current_weather_and_disaster = "Sun"
+			current_weather_and_disaster_int = 0
+			if is_instance_valid(map):
+				map.is_sun()
+
+		"Cloud":
+			current_weather_and_disaster = "Cloud"
+			current_weather_and_disaster_int = 1
+			if is_instance_valid(map):
+				map.is_cloud()
+		"Raining":
+			current_weather_and_disaster = "Raining"
+			current_weather_and_disaster_int = 2
+			if is_instance_valid(map):
+				map.is_raining()
+		"Storm":
+			current_weather_and_disaster = "Storm"
+			current_weather_and_disaster_int = 3
+			if is_instance_valid(map):
+				map.is_storm()
+		"Linghting storm":
+			current_weather_and_disaster = "Linghting storm"
+			current_weather_and_disaster_int = 4
+			if is_instance_valid(map):
+				map.is_linghting_storm()
+		"Tsunami":
+			current_weather_and_disaster = "Tsunami"
+			current_weather_and_disaster_int = 5
+			if is_instance_valid(map):
+				map.is_tsunami()
+		"Meteor shower":
+			current_weather_and_disaster = "Meteor shower"
+			current_weather_and_disaster_int = 6
+		"Volcano":
+			current_weather_and_disaster = "Volcano"
+			current_weather_and_disaster_int = 7
+			if is_instance_valid(map):
+				map.is_volcano()
+		"Tornado":
+			current_weather_and_disaster = "Tornado"
+			current_weather_and_disaster_int = 8
+			if is_instance_valid(map):
+				map.is_tornado()
+		"Acid rain":
+			current_weather_and_disaster = "Acid rain"
+			current_weather_and_disaster_int = 9
+			if is_instance_valid(map):
+				map.is_acid_rain()
+		"Earthquake":
+			current_weather_and_disaster = "Earthquake"
+			current_weather_and_disaster_int = 10
+			if is_instance_valid(map):
+				map.is_earthquake()
+
+		"Sand Storm":
+			current_weather_and_disaster = "Sand Storm"
+			current_weather_and_disaster_int = 11
+			if is_instance_valid(map):
+				map.is_sandstorm()
+		"blizzard":
+			current_weather_and_disaster = "blizzard"
+			current_weather_and_disaster_int = 12
+			if is_instance_valid(map):
+				map.is_blizzard()
+
+func _on_timer_timeout():
+	if Globals.started:
+		sync_weather_and_disaster()
+	else:
+		if Globals.is_networking:
+			multiplayer.multiplayer_peer.close()
+
+
+func teleport_position(pos):
+	for player in self.get_children():
+		if player.is_multiplayer_authority() and player.is_in_group("player"):
+			player.position = pos
+
+func teleport_player(player_name):
+	for player in self.get_children():
+		if player.is_multiplayer_authority() and player.is_in_group("player"):
+			for player2 in self.get_children():
+				if player2.is_in_group("player") and player2.username == player_name  :
+					player.position = player2.position
+
+
+func kill_player(player_name):
+	for player2 in self.get_children():
+		if player2.is_in_group("player") and player2.username == player_name  :
+			player2.damage(100)
+
+func god_mode_player(player_name):
+	for player2 in self.get_children():
+		if player2.is_in_group("player") and player2.username == player_name  :
+			player2.god_mode = true
+
+func kick_player(player_name):
+	for player2 in self.get_children():
+		if player2.is_in_group("player") and player2.username == player_name  :
+			multiplayer.multiplayer_peer.disconnect_peer(player2.id, true)
+
+func damage_player(player_name, damage):
+	for player2 in self.get_children():
+		player2.damage(damage)
