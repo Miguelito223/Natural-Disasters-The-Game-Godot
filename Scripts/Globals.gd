@@ -473,11 +473,6 @@ func player_join(peer_id):
 	player.id = peer_id
 	player.name = str(peer_id)
 
-	print("syncring timer, map, player_list and weather/disasters in server")
-	var player_host = get_node(str(multiplayer.get_unique_id()))
-	if player_host != null and player_host != player:
-		add_player_to_list.rpc_id(peer_id, multiplayer.get_unique_id(), player_host)
-
 	add_player_to_list.rpc(peer_id, player)
 
 	if players_conected_int >= 2 and started == false:
@@ -508,7 +503,7 @@ func player_disconect(peer_id):
 		if not multiplayer.is_server():
 			return 
 
-	var player = get_node(str(peer_id))
+	var player = map.get_node(str(peer_id))
 	if is_instance_valid(player):
 		print("Disconected player id: " + str(peer_id))
 		if multiplayer.is_server():

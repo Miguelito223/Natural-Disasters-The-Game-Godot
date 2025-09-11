@@ -54,6 +54,21 @@ properties/15/replication_mode = 1
 properties/16/path = NodePath(".:current_weather_and_disaster_int")
 properties/16/spawn = true
 properties/16/replication_mode = 1
+properties/17/path = NodePath("Timer:process_callback")
+properties/17/spawn = true
+properties/17/replication_mode = 1
+properties/18/path = NodePath("Timer:wait_time")
+properties/18/spawn = true
+properties/18/replication_mode = 1
+properties/19/path = NodePath("Timer:one_shot")
+properties/19/spawn = true
+properties/19/replication_mode = 1
+properties/20/path = NodePath("Timer:autostart")
+properties/20/spawn = true
+properties/20/replication_mode = 1
+properties/21/path = NodePath("Timer:ignore_time_scale")
+properties/21/spawn = true
+properties/21/replication_mode = 1
 
 [node name="Globals" type="Node"]
 script = ExtResource("1_uq25s")
