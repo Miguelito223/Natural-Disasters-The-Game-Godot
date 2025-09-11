@@ -33,6 +33,7 @@ func _ready():
 			for i in multiplayer.get_peers():
 				Globals.player_join(i)
 
+			
 			Globals.timer.start(Globals.GlobalsData.timer_disasters)
 
 
@@ -44,6 +45,12 @@ func _physics_process(_delta):
 	
 func _process(_delta):
 	terrain.ambient_wind = Globals.Wind_speed * _delta
+
+	if Globals.is_networking:
+		if Globals.players_conected.size() > 1:
+			Globals.started = true
+		else:
+			Globals.started = false
 
 
 

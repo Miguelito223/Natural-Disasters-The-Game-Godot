@@ -331,6 +331,13 @@ func hit_chance(chance: int) -> bool:
 	else:
 		return randf() < (clamp(chance * get_physics_multiplier(), 0, 100) / 100)
 	
+@rpc("any_peer", "call_local")
+func sync_player_list():
+	players_conected.clear()
+
+	for p in get_tree().get_nodes_in_group("player"):
+		if is_instance_valid(p):
+			players_conected.append(p)
 
 func hostwithport(port_int):
 	enetMultiplayerpeer = ENetMultiplayerPeer.new()
@@ -361,13 +368,13 @@ func joinwithip(ip_str, port_int):
 func server_fail():
 	print("client disconected: failed to load")
 	is_networking = false
-	players_conected.clear()
+	sync_player_list()
 	LoadScene.load_scene(map, "res://Scenes/main_menu.tscn")
 	
 func server_disconect():
 	print("client disconected")
 	is_networking = false
-	players_conected.clear()
+	sync_player_list()
 	LoadScene.load_scene(map, "res://Scenes/main_menu.tscn")
 
 
@@ -468,7 +475,7 @@ func player_join(peer_id):
 		player.name = str(peer_id)
 		map.add_child(player, true)
 
-		players_conected.append(player)
+		sync_player_list.rpc()
 
 		set_weather_and_disaster.rpc_id(peer_id, current_weather_and_disaster_int)
 
@@ -492,7 +499,7 @@ func player_disconect(peer_id):
 	var player = map.get_node(str(peer_id))
 	if is_instance_valid(player):
 		print("Disconected player id: " + str(peer_id))
-		players_conected.erase(player)
+		sync_player_list.rpc()
 		player.queue_free()
 		print("finish :D")
 
