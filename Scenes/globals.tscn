@@ -54,41 +54,43 @@ properties/15/replication_mode = 1
 properties/16/path = NodePath(".:current_weather_and_disaster_int")
 properties/16/spawn = true
 properties/16/replication_mode = 1
-properties/17/path = NodePath("Timer:process_callback")
+properties/17/path = NodePath(".:points")
 properties/17/spawn = true
 properties/17/replication_mode = 1
-properties/18/path = NodePath("Timer:wait_time")
+properties/18/path = NodePath(".:players_conected_int")
 properties/18/spawn = true
 properties/18/replication_mode = 1
-properties/19/path = NodePath("Timer:one_shot")
+properties/19/path = NodePath(".:players_conected_list")
 properties/19/spawn = true
 properties/19/replication_mode = 1
-properties/20/path = NodePath("Timer:autostart")
+properties/20/path = NodePath(".:players_conected_array")
 properties/20/spawn = true
 properties/20/replication_mode = 1
-properties/21/path = NodePath("Timer:ignore_time_scale")
+properties/21/path = NodePath("Timer:wait_time")
 properties/21/spawn = true
 properties/21/replication_mode = 1
-properties/22/path = NodePath(".:points")
+properties/22/path = NodePath("Timer:autostart")
 properties/22/spawn = true
 properties/22/replication_mode = 1
-properties/23/path = NodePath(".:players_conected_int")
+properties/23/path = NodePath("Timer:ignore_time_scale")
 properties/23/spawn = true
 properties/23/replication_mode = 1
-properties/24/path = NodePath(".:players_conected_list")
+properties/24/path = NodePath("Timer:one_shot")
 properties/24/spawn = true
 properties/24/replication_mode = 1
-properties/25/path = NodePath(".:players_conected_array")
+properties/25/path = NodePath("Timer:process_callback")
 properties/25/spawn = true
 properties/25/replication_mode = 1
+properties/26/path = NodePath(".:time_left")
+properties/26/spawn = true
+properties/26/replication_mode = 1
 
 [node name="Globals" type="Node"]
 script = ExtResource("1_uq25s")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="GlobalsSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_i2lb3")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 60.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

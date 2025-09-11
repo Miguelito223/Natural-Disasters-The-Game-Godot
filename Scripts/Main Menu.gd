@@ -146,9 +146,6 @@ func _on_username_text_changed(new_text:String):
 
 func _on_h_slider_2_value_changed(value):
 	Globals.GlobalsData.timer_disasters = value
-	if Globals.map == null:
-		return
-	Globals.sync_timer(value)
 	Globals.GlobalsData.save_file()
 
 

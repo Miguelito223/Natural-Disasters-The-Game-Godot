@@ -65,6 +65,16 @@ script = ExtResource("5_sr3y7")
 mode = 0
 textures = [[ExtResource("8_n5486")], [null]]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hhy4h"]
+metadata/_preview_in_3d_space_ = true
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_bq76v"]
+noise = SubResource("FastNoiseLite_hhy4h")
+
+[sub_resource type="FogMaterial" id="FogMaterial_w14ph"]
+density = 0.05
+density_texture = SubResource("NoiseTexture3D_bq76v")
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8u7l0"]
 properties/0/path = NodePath("FogVolume:shape")
 properties/0/spawn = true
@@ -105,16 +115,6 @@ properties/11/replication_mode = 1
 properties/12/path = NodePath("Chat/TextEdit:text")
 properties/12/spawn = true
 properties/12/replication_mode = 1
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_hhy4h"]
-metadata/_preview_in_3d_space_ = true
-
-[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_bq76v"]
-noise = SubResource("FastNoiseLite_hhy4h")
-
-[sub_resource type="FogMaterial" id="FogMaterial_w14ph"]
-density = 0.05
-density_texture = SubResource("NoiseTexture3D_bq76v")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b68bb"]
 size = Vector3(0, 100, 10000)
@@ -176,9 +176,6 @@ shader_params/u_bottom_ao = null
 shader_params/u_instance_scale = null
 shader_params/u_roughness = null
 metadata/_editor_icon = ExtResource("10_lmmy2")
-
-[node name="MapSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_8u7l0")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_w1fny")
@@ -284,6 +281,9 @@ texture_filter = 1
 position = Vector2(1042, 102)
 scale = Vector2(7.58173, 7.86641)
 texture = ExtResource("15_32db0")
+
+[node name="MapSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_8u7l0")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)

@@ -14,7 +14,12 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	if Globals.is_networking:
+		if not multiplayer.is_server():
+			return
+
+
 	if Globals.started:
 		$Label.text = "Current Disasters/Weather is: \n"  + Globals.current_weather_and_disaster + "\nTime Left for the next disasters: \n" + str(int(Globals.timer.time_left)) + "\nTime:\n" + str(Globals.Hour) + ":" + str(Globals.Minute)
 	else:
-		$Label.text = "Waiting for players... Time remain: \n" + str(int(Globals.timer.time_left))
+		$Label.text = "Waiting for players... Time remain: \n" + str(int(Globals.time_left))

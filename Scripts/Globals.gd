@@ -1,13 +1,11 @@
 extends Node
 
 #Network
-@export var ip = "127.0.0.1"
+@export var ip = "localhost"
 @export var port = 9999
 @export var points = 0
 @export var username = ""
-@export var players_conected_array = []
-@export var players_conected_list = {}
-@export var players_conected_int = players_conected_list.size()
+@export var players_conected: Array[Node]
 @export var is_networking = false
 var enetMultiplayerpeer: ENetMultiplayerPeer
 
@@ -25,6 +23,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 #Globals Time
 @export var time: float = 0.0
+@export var time_left: float = 0.0
 @export var Day: int = 0
 @export var Hour: int = 0
 @export var Minute: int = 00
@@ -362,15 +361,13 @@ func joinwithip(ip_str, port_int):
 func server_fail():
 	print("client disconected: failed to load")
 	is_networking = false
-	players_conected_array.clear()
-	players_conected_int = players_conected_array.size()
+	players_conected.clear()
 	LoadScene.load_scene(map, "res://Scenes/main_menu.tscn")
 	
 func server_disconect():
 	print("client disconected")
 	is_networking = false
-	players_conected_array.clear()
-	players_conected_int = players_conected_array.size()
+	players_conected.clear()
 	LoadScene.load_scene(map, "res://Scenes/main_menu.tscn")
 
 
@@ -409,12 +406,18 @@ func _exit_tree() -> void:
 	multiplayer.connected_to_server.disconnect(server_connected)
 	multiplayer.connection_failed.disconnect(server_fail)
 
+	Globals.Temperature_target = Globals.Temperature_original
+	Globals.Humidity_target = Globals.Humidity_original
+	Globals.pressure_target = Globals.pressure_original
+	Globals.Wind_Direction_target = Globals.Wind_Direction_original
+	Globals.Wind_speed_target = Globals.Wind_speed_original
+
 func _process(_delta):
 	if is_networking:
 		if not multiplayer.is_server(): 
 			return
 
-	
+	time_left = timer.time_left
 	Temperature = clamp(Temperature, -275.5, 275.5)
 	Humidity = clamp(Humidity, 0, 100)
 	bradiation = clamp(bradiation, 0, 100)
@@ -452,59 +455,26 @@ func _ready():
 
 		hostwithport(port)
 	
-@rpc("any_peer", "call_local")
-func add_player_to_list(id, player):
-	players_conected_array.append(player)
-	players_conected_list[id] = player
-	players_conected_int = players_conected_array.size()
-
-@rpc("any_peer", "call_local")
-func remove_player_to_list(id, player):
-	players_conected_array.erase(player)
-	players_conected_list.erase(id)
-	players_conected_int = players_conected_array.size()
-
-@rpc("any_peer","call_local")
-func set_started(started_bool):
-	started = started_bool
-
-@rpc("any_peer", "call_local")
-func sync_timer(timer_int: int) -> void:
-	print("syncring timer...")
-	timer.stop()
-	timer.wait_time = timer_int
-	timer.start()
 
 func player_join(peer_id):
 	if is_networking:
 		if not multiplayer.is_server():
 			return 
 			
-	print("Joined player id: " + str(peer_id))
 	var player = player_scene.instantiate()
-	player.id = peer_id
-	player.name = str(peer_id)
-
-	add_player_to_list.rpc(peer_id, player)
-
-	if players_conected_int >= 2 and started == false:
-		sync_timer.rpc(GlobalsData.timer_disasters)
-		set_started.rpc(true)
-	elif players_conected_int < 2 and started == true:
-		sync_timer.rpc(60)
-		set_started.rpc(false)
-	elif players_conected_int >= 2 and started == true:
-		sync_timer.rpc(GlobalsData.timer_disasters)
-		set_started.rpc(true)
-	else:
-		sync_timer.rpc(60)
-		set_started.rpc(false)
-
-	set_weather_and_disaster.rpc_id(peer_id, current_weather_and_disaster_int)
-
 	if map and is_instance_valid(map):
+		print("Joined player id: " + str(peer_id))
+		player.id = peer_id
+		player.name = str(peer_id)
 		map.add_child(player, true)
+
+		players_conected.append(player)
+
+		set_weather_and_disaster.rpc_id(peer_id, current_weather_and_disaster_int)
+
 		print("finish :D")
+
+
 
 
 func player_join_singleplayer():
@@ -522,24 +492,8 @@ func player_disconect(peer_id):
 	var player = map.get_node(str(peer_id))
 	if is_instance_valid(player):
 		print("Disconected player id: " + str(peer_id))
-		print("syncring timer, map, player_list and weather/disasters in server")
-		remove_player_to_list.rpc(peer_id, player)
-
-		if players_conected_int >= 2 and started == false:
-			sync_timer.rpc(GlobalsData.timer_disasters)
-			set_started.rpc(true)
-		elif players_conected_int < 2 and started == true:
-			sync_timer.rpc(60)
-			set_started.rpc(false)
-		elif players_conected_int >= 2 and started == true:
-			sync_timer.rpc(GlobalsData.timer_disasters)
-			set_started.rpc(true)
-		else:
-			sync_timer.rpc(60)
-			set_started.rpc(false)
-
+		players_conected.erase(player)
 		player.queue_free()
-
 		print("finish :D")
 
 
@@ -690,19 +644,6 @@ func set_weather_and_disaster(weather_and_disaster_index):
 			if is_instance_valid(map):
 				map.is_blizzard()
 
-func _on_timer_timeout():
-	if started:
-		if is_networking:
-			if multiplayer.is_server():
-				sync_timer.rpc(GlobalsData.timer_disasters)
-		else:
-			sync_timer(GlobalsData.timer_disasters)
-
-		sync_weather_and_disaster()
-	else:
-		if is_networking:
-			multiplayer.multiplayer_peer.close()
-
 
 func teleport_position(pos):
 	for player in self.get_children():
@@ -735,3 +676,12 @@ func kick_player(player_name):
 func damage_player(player_name, damage):
 	for player2 in self.get_children():
 		player2.damage(damage)
+
+
+
+func _on_timer_timeout():
+	if started:
+		sync_weather_and_disaster()
+	else:
+		if Globals.is_networking:
+			multiplayer.multiplayer_peer.close()

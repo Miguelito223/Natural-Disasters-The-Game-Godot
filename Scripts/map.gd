@@ -24,7 +24,7 @@ func _ready():
 	if not Globals.is_networking:
 		Globals.player_join_singleplayer()
 		Globals.started = true
-		Globals.sync_timer(Globals.GlobalsData.timer_disasters)
+		Globals.timer.start(Globals.GlobalsData.timer_disasters)
 	else:
 		if multiplayer.is_server():
 			if not OS.has_feature("dedicated_server") :
@@ -32,6 +32,8 @@ func _ready():
 
 			for i in multiplayer.get_peers():
 				Globals.player_join(i)
+
+			Globals.timer.start(Globals.GlobalsData.timer_disasters)
 
 
 # Llama a la función wind para cada objeto en la escena

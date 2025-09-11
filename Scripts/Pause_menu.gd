@@ -116,15 +116,14 @@ func _on_exit_pressed():
 		multiplayer.multiplayer_peer.close()
 	else:
 		get_tree().paused = false
-		Globals.Temperature_target = Globals.Temperature_original
-		Globals.Humidity_target = Globals.Humidity_original
-		Globals.pressure_target = Globals.pressure_original
-		Globals.Wind_Direction_target = Globals.Wind_Direction_original
-		Globals.Wind_speed_target = Globals.Wind_speed_original
-		UnloadScene.unload_scene(Globals.map)
-		Globals.main_menu.show()
+		LoadScene.load_scene(Globals.map, "res://Scenes/Main Menu.tscn")
 		
-
+func _exit_tree() -> void:
+	Globals.Temperature_target = Globals.Temperature_original
+	Globals.Humidity_target = Globals.Humidity_original
+	Globals.pressure_target = Globals.pressure_original
+	Globals.Wind_Direction_target = Globals.Wind_Direction_original
+	Globals.Wind_speed_target = Globals.Wind_speed_original
 
 func _on_fps_toggled(toggled_on:bool):
 	Globals.GlobalsData.FPS = toggled_on
@@ -190,7 +189,6 @@ func _on_time_value_changed(value):
 	if not Globals.is_networking:
 		Globals.GlobalsData.timer_disasters = value
 		Globals.GlobalsData.save_file()
-		Globals.sync_timer(value)
 	else:
 		if not multiplayer.is_server():
 			return
@@ -200,7 +198,6 @@ func _on_time_value_changed(value):
 		
 		Globals.GlobalsData.timer_disasters = value
 		Globals.GlobalsData.save_file()
-		Globals.sync_timer.rpc(value)
 		
 func _on_volumen_value_changed(value:float):
 	Globals.GlobalsData.volumen = value

@@ -20,8 +20,8 @@ func _process(_delta):
 			$List.remove_child(child)
 
 		# Iterar sobre los jugadores conectados y agregarlos a la lista
-		if not Globals.players_conected_array.is_empty():
-			for player_data in Globals.players_conected_array:
+		if not Globals.players_conected.is_empty():
+			for player_data in Globals.players_conected:
 				if is_instance_valid(player_data):
 					var label = Label.new()
 					label.text = player_data.username + " points: " + str(player_data.points)
