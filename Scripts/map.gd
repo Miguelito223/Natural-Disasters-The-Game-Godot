@@ -21,11 +21,10 @@ func _ready():
 	Globals.map = self
 	is_sun()
 
-	Globals.timer.start()
-
 	if not Globals.is_networking:
 		Globals.player_join_singleplayer()
 		Globals.started = true
+		Globals.sync_timer(Globals.GlobalsData.timer_disasters)
 	else:
 		if multiplayer.is_server():
 			if not OS.has_feature("dedicated_server") :

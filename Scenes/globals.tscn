@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bp412twicns7t"]
 
-[ext_resource type="Script" uid="uid://cijnuqyfrm6ys" path="res://Scripts/globals.gd" id="1_uq25s"]
+[ext_resource type="Script" uid="uid://cijnuqyfrm6ys" path="res://Scripts/Globals.gd" id="1_uq25s"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_i2lb3"]
 properties/0/path = NodePath(".:username")
@@ -69,6 +69,18 @@ properties/20/replication_mode = 1
 properties/21/path = NodePath("Timer:ignore_time_scale")
 properties/21/spawn = true
 properties/21/replication_mode = 1
+properties/22/path = NodePath(".:points")
+properties/22/spawn = true
+properties/22/replication_mode = 1
+properties/23/path = NodePath(".:players_conected_int")
+properties/23/spawn = true
+properties/23/replication_mode = 1
+properties/24/path = NodePath(".:players_conected_list")
+properties/24/spawn = true
+properties/24/replication_mode = 1
+properties/25/path = NodePath(".:players_conected_array")
+properties/25/spawn = true
+properties/25/replication_mode = 1
 
 [node name="Globals" type="Node"]
 script = ExtResource("1_uq25s")

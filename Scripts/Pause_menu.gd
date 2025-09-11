@@ -190,6 +190,7 @@ func _on_time_value_changed(value):
 	if not Globals.is_networking:
 		Globals.GlobalsData.timer_disasters = value
 		Globals.GlobalsData.save_file()
+		Globals.sync_timer(value)
 	else:
 		if not multiplayer.is_server():
 			return
@@ -199,6 +200,7 @@ func _on_time_value_changed(value):
 		
 		Globals.GlobalsData.timer_disasters = value
 		Globals.GlobalsData.save_file()
+		Globals.sync_timer.rpc(value)
 		
 func _on_volumen_value_changed(value:float):
 	Globals.GlobalsData.volumen = value

@@ -401,6 +401,7 @@ func UPNP_setup():
 		return
 
 
+
 func _exit_tree() -> void:
 	multiplayer.peer_connected.disconnect(player_join)
 	multiplayer.peer_disconnected.disconnect(player_disconect)
@@ -463,8 +464,19 @@ func remove_player_to_list(id, player):
 	players_conected_list.erase(id)
 	players_conected_int = players_conected_array.size()
 
+@rpc("any_peer","call_local")
+func set_started(started_bool):
+	started = started_bool
+
+@rpc("any_peer", "call_local")
+func sync_timer(timer_int: int) -> void:
+	print("syncring timer...")
+	timer.stop()
+	timer.wait_time = timer_int
+	timer.start()
+
 func player_join(peer_id):
-	if Globals.is_networking:
+	if is_networking:
 		if not multiplayer.is_server():
 			return 
 			
@@ -476,13 +488,17 @@ func player_join(peer_id):
 	add_player_to_list.rpc(peer_id, player)
 
 	if players_conected_int >= 2 and started == false:
-		started = true
+		sync_timer.rpc(GlobalsData.timer_disasters)
+		set_started.rpc(true)
 	elif players_conected_int < 2 and started == true:
-		started = false
+		sync_timer.rpc(60)
+		set_started.rpc(false)
 	elif players_conected_int >= 2 and started == true:
-		started = true
+		sync_timer.rpc(GlobalsData.timer_disasters)
+		set_started.rpc(true)
 	else:
-		started = false
+		sync_timer.rpc(60)
+		set_started.rpc(false)
 
 	set_weather_and_disaster.rpc_id(peer_id, current_weather_and_disaster_int)
 
@@ -499,29 +515,32 @@ func player_join_singleplayer():
 
 
 func player_disconect(peer_id):
-	if Globals.is_networking:
+	if is_networking:
 		if not multiplayer.is_server():
 			return 
 
 	var player = map.get_node(str(peer_id))
 	if is_instance_valid(player):
 		print("Disconected player id: " + str(peer_id))
-		if multiplayer.is_server():
-			print("syncring timer, map, player_list and weather/disasters in server")
-			remove_player_to_list.rpc(peer_id, player)
+		print("syncring timer, map, player_list and weather/disasters in server")
+		remove_player_to_list.rpc(peer_id, player)
 
-			if players_conected_int >= 2 and started == false:
-				started = true
-			elif players_conected_int < 2 and started == true:
-				started = false
-			elif players_conected_int >= 2 and started == true:
-				started = true
-			else:
-				started = false
+		if players_conected_int >= 2 and started == false:
+			sync_timer.rpc(GlobalsData.timer_disasters)
+			set_started.rpc(true)
+		elif players_conected_int < 2 and started == true:
+			sync_timer.rpc(60)
+			set_started.rpc(false)
+		elif players_conected_int >= 2 and started == true:
+			sync_timer.rpc(GlobalsData.timer_disasters)
+			set_started.rpc(true)
+		else:
+			sync_timer.rpc(60)
+			set_started.rpc(false)
 
-			player.queue_free()
+		player.queue_free()
 
-			print("finish :D")
+		print("finish :D")
 
 
 
@@ -672,10 +691,16 @@ func set_weather_and_disaster(weather_and_disaster_index):
 				map.is_blizzard()
 
 func _on_timer_timeout():
-	if Globals.started:
+	if started:
+		if is_networking:
+			if multiplayer.is_server():
+				sync_timer.rpc(GlobalsData.timer_disasters)
+		else:
+			sync_timer(GlobalsData.timer_disasters)
+
 		sync_weather_and_disaster()
 	else:
-		if Globals.is_networking:
+		if is_networking:
 			multiplayer.multiplayer_peer.close()
 
 
