@@ -48,7 +48,7 @@ properties/10/path = NodePath("Room/Pivot/Door:scale")
 properties/10/spawn = true
 properties/10/replication_mode = 1
 
-[node name="hause" type="StaticBody3D" node_paths=PackedStringArray("door_open_sound", "door_close_sound") groups=["movable_objects", "wind_effected_objects"]]
+[node name="hause" type="StaticBody3D" node_paths=PackedStringArray("door_open_sound", "door_close_sound")]
 script = ExtResource("3_0ons7")
 door_open_sound = NodePath("Open_door_sound")
 door_close_sound = NodePath("Close_door_sound")
