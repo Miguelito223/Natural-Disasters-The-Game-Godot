@@ -342,14 +342,17 @@ func sync_player_list():
 
 
 func print_role(msg: String):
-	var is_server = get_tree().get_multiplayer().is_server() and is_networking
-	
-	if is_server:
-		# Azul
-		print_rich("[color=blue][Servidor] " + msg + "[/color]")
+	if is_networking:
+		var is_server = get_tree().get_multiplayer().is_server()
+		
+		if is_server:
+			# Azul
+			print_rich("[color=blue][Servidor] " + msg + "[/color]")
+		else:
+			# Amarillo
+			print_rich("[color=yellow][Cliente] " + msg + "[/color]")
 	else:
-		# Amarillo
-		print_rich("[color=yellow][Cliente] " + msg + "[/color]")
+		print(msg)
 
 
 
@@ -361,11 +364,14 @@ func hostwithport(port_int):
 		multiplayer.allow_object_decoding = true
 		if multiplayer.is_server():
 			is_networking = true
-			if OS.has_feature("dedicated_server"):
+			if OS.has_feature("dedicated_server") or "s" in OS.get_cmdline_user_args() or "server" in OS.get_cmdline_user_args():
 				print_role("Servidor dedicado iniciado.")
 
 				await get_tree().create_timer(2).timeout
 
+				UPNP_setup()
+				LoadScene.load_scene(main_menu, "map")
+			else:
 				UPNP_setup()
 				LoadScene.load_scene(main_menu, "map")
 	else:
@@ -465,6 +471,24 @@ func _ready():
 	multiplayer.connected_to_server.connect(server_connected)
 	multiplayer.connection_failed.connect(server_fail)
 
+	print("ready is running")
+
+	if OS.has_feature("dedicated_server") or "s" in OS.get_cmdline_user_args() or "server" in OS.get_cmdline_user_args():
+		var args = OS.get_cmdline_user_args()
+		for arg in args:
+			var key_value = arg.rsplit("=")
+			match key_value[0]:
+				"port":
+					Globals.port = key_value[1].to_int()
+
+		Globals.print_role("port:" + Globals.port)
+		Globals.print_role("ip:" + IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")), IP.TYPE_IPV4))
+		
+		await get_tree().create_timer(2).timeout
+
+		Globals.hostwithport(Globals.port)
+	else: 
+		Globals.print_role("No se puede jugar en modo de servidor")
 	
 
 func player_join(peer_id):

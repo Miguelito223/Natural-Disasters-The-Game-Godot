@@ -15,6 +15,7 @@ var progress: Array = []
 
 var use_sub_theads: bool = false
 
+
 func load_scene(current_scene, next_scene):
 
 	if next_scene != null:
