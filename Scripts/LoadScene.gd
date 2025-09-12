@@ -38,7 +38,7 @@ func load_scene(current_scene, next_scene):
 	
 	var loader_next_scene = ResourceLoader.load_threaded_request(scene_path, "", use_sub_theads)
 	if loader_next_scene == OK:
-		print("is ok")
+		Globals.print_role("is ok")
 		set_process(true)
 
 
@@ -46,17 +46,17 @@ func _process(_delta):
 	var load_status = ResourceLoader.load_threaded_get_status(scene_path, progress)
 	match load_status:
 		0:
-			print("failed to load: invalid resource")
+			Globals.print_role("failed to load: invalid resource")
 			set_process(false)
 			return
 		2:
-			print("failed to load")
+			Globals.print_role("failed to load")
 			set_process(false)
 			return
 		1:
 			emit_signal("progress_changed", progress[0])
 		3:
-			print("Completed")
+			Globals.print_role("Completed")
 			
 			if scene_path == "res://Scenes/main.tscn":
 				pass

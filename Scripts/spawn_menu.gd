@@ -26,7 +26,7 @@ func load_spawnlist_entities():
 				if node.get_class() == "RigidBody3D":
 					spawnlist.append(node)
 			else:
-				print("i cant import that")
+				Globals.print_role("i cant import that")
 				return
 
 func load_buttons():
@@ -44,7 +44,7 @@ func load_buttons():
 func on_press(i: Node):
 	if Globals.is_networking:
 		if not multiplayer.is_server():
-			print("You not a host")
+			Globals.print_role("You not a host")
 			return
 
 	var mousePos = get_viewport().get_mouse_position()

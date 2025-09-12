@@ -55,7 +55,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @export var bounding_radius_areas = {}
 
-@export var player_scene = preload("res://Scenes/player.tscn")
+
 
 @export var started = false
 @export var GlobalsData: DataResource = DataResource.load_file()
@@ -63,12 +63,13 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var current_weather_and_disaster = "Sun"
 @export var current_weather_and_disaster_int = 0
 
-@export var linghting_scene = preload("res://Scenes/thunder.tscn")
-@export var meteor_scene = preload("res://Scenes/meteors.tscn")
-@export var tornado_scene = preload("res://Scenes/tornado.tscn")
-@export var tsunami_scene = preload("res://Scenes/tsunami.tscn")
-@export var volcano_scene = preload("res://Scenes/Volcano.tscn")
-@export var earthquake_scene = preload("res://Scenes/earthquake.tscn")
+var player_scene = preload("res://Scenes/player.tscn")
+var linghting_scene = preload("res://Scenes/thunder.tscn")
+var meteor_scene = preload("res://Scenes/meteors.tscn")
+var tornado_scene = preload("res://Scenes/tornado.tscn")
+var tsunami_scene = preload("res://Scenes/tsunami.tscn")
+var volcano_scene = preload("res://Scenes/Volcano.tscn")
+var earthquake_scene = preload("res://Scenes/earthquake.tscn")
 
 @onready var timer = $Timer
 
@@ -339,6 +340,19 @@ func sync_player_list():
 		if is_instance_valid(p):
 			players_conected.append(p)
 
+
+func print_role(msg: String):
+	var is_server = get_tree().get_multiplayer().is_server() and is_networking
+	
+	if is_server:
+		# Azul
+		print_rich("[color=blue][Servidor] " + msg + "[/color]")
+	else:
+		# Amarillo
+		print_rich("[color=yellow][Cliente] " + msg + "[/color]")
+
+
+
 func hostwithport(port_int):
 	enetMultiplayerpeer = ENetMultiplayerPeer.new()
 	var error = enetMultiplayerpeer.create_server(port_int)
@@ -347,10 +361,15 @@ func hostwithport(port_int):
 		multiplayer.allow_object_decoding = true
 		if multiplayer.is_server():
 			is_networking = true
-			UPNP_setup()
-			LoadScene.load_scene(main_menu, "map")
+			if OS.has_feature("dedicated_server"):
+				print_role("Servidor dedicado iniciado.")
+
+				await get_tree().create_timer(2).timeout
+
+				UPNP_setup()
+				LoadScene.load_scene(main_menu, "map")
 	else:
-		print("Fatal Error in server")
+		print_role("Fatal Error in server")
 
 
 func joinwithip(ip_str, port_int):
@@ -363,23 +382,23 @@ func joinwithip(ip_str, port_int):
 			is_networking = true
 			UnloadScene.unload_scene(main_menu)
 	else:
-		print("Fatal Error in client")
+		print_role("Fatal Error in client")
 
 func server_fail():
-	print("client disconected: failed to load")
+	print_role("client disconected: failed to load")
 	is_networking = false
 	sync_player_list()
 	LoadScene.load_scene(map, "res://Scenes/main_menu.tscn")
 	
 func server_disconect():
-	print("client disconected")
+	print_role("client disconected")
 	is_networking = false
 	sync_player_list()
 	LoadScene.load_scene(map, "res://Scenes/main_menu.tscn")
 
 
 func server_connected():
-	print("connected to server :)")
+	print_role("connected to server :)")
 	is_networking = true
 
 func UPNP_setup():
@@ -387,21 +406,21 @@ func UPNP_setup():
 
 	var discover_result = upnp.discover()
 	if discover_result != UPNP.UPNP_RESULT_SUCCESS:  
-		print("UPNP discover Failed")
+		print_role("UPNP discover Failed")
 		return
 	
 	if upnp.get_gateway() and !upnp.get_gateway().is_valid_gateway():
-		print("UPNP invalid gateway")
+		print_role("UPNP invalid gateway")
 		return 
 
 	var map_result_udp = upnp.add_port_mapping(port, port, "", "UDP")
 	if map_result_udp != UPNP.UPNP_RESULT_SUCCESS:
-		print("UPNP port UDP mapping failed")
+		print_role("UPNP port UDP mapping failed")
 		return
 
 	var map_result_tcp = upnp.add_port_mapping(port, port, "", "TCP")
 	if map_result_tcp != UPNP.UPNP_RESULT_SUCCESS:
-		print("UPNP port TCP mapping failed")
+		print_role("UPNP port TCP mapping failed")
 		return
 
 
@@ -446,21 +465,6 @@ func _ready():
 	multiplayer.connected_to_server.connect(server_connected)
 	multiplayer.connection_failed.connect(server_fail)
 
-
-	if OS.has_feature("dedicated_server") or "s" in OS.get_cmdline_user_args() or "server" in OS.get_cmdline_user_args():
-		var args = OS.get_cmdline_user_args()
-		for arg in args:
-			var key_value = arg.rsplit("=")
-			match key_value[0]:
-				"port":
-					port = key_value[1].to_int()
-
-		print("port:", port)
-		print("ip:", IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1))
-		
-		await get_tree().create_timer(2).timeout
-
-		hostwithport(port)
 	
 
 func player_join(peer_id):
@@ -470,7 +474,7 @@ func player_join(peer_id):
 			
 	var player = player_scene.instantiate()
 	if map and is_instance_valid(map):
-		print("Joined player id: " + str(peer_id))
+		print_role("Joined player id: " + str(peer_id))
 		player.id = peer_id
 		player.name = str(peer_id)
 		map.add_child(player, true)
@@ -479,7 +483,7 @@ func player_join(peer_id):
 
 		set_weather_and_disaster.rpc_id(peer_id, current_weather_and_disaster_int)
 
-		print("finish :D")
+		print_role("finish :D")
 
 
 
@@ -498,10 +502,10 @@ func player_disconect(peer_id):
 
 	var player = map.get_node(str(peer_id))
 	if is_instance_valid(player):
-		print("Disconected player id: " + str(peer_id))
+		print_role("Disconected player id: " + str(peer_id))
 		sync_player_list.rpc()
 		player.queue_free()
-		print("finish :D")
+		print_role("finish :D")
 
 
 

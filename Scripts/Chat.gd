@@ -114,7 +114,7 @@ func msg_rpc(username, data):
 					$TextEdit.text += str(username, ": ", data, "\n")
 					$TextEdit.scroll_vertical =  $TextEdit.get_line_height()
 				data = data.erase(0, 1)
-				print(data)
+				Globals.print_role(data)
 				_run_command.rpc(data)
 			else:
 				$TextEdit.text +=  "You are not a have admin... \n"	
@@ -129,7 +129,7 @@ func msg_rpc(username, data):
 				$TextEdit.text += str(username, ": ", data, "\n")
 				$TextEdit.scroll_vertical =  $TextEdit.get_line_height()
 			data = data.erase(0, 1)
-			print(data)
+			Globals.print_role(data)
 			_run_command(data)
 		else:
 			if data != "" or data != " ":

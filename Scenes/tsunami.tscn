@@ -20,7 +20,7 @@ properties/2/path = NodePath(".:scale")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="Tsunami" type="CharacterBody3D"]
+[node name="tsunami" type="CharacterBody3D"]
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_6j28r")

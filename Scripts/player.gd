@@ -131,7 +131,7 @@ func _ready():
 	dust_node.emitting = false
 	snow_node.emitting = false
 
-	print("Im the player id: " + str(id))
+	Globals.print_role("Im the player id: " + str(id))
 
 	_reset_player()
 
@@ -331,7 +331,7 @@ func _physics_process(delta):
 	if interactor.is_colliding():
 		var target = interactor.get_collider()
 		if target != null and target.has_method("Interact"):
-			print("Press e to interact")
+			Globals.print_role("Press e to interact")
 
 			if Input.is_action_just_pressed("Interact"):
 				target.Interact()
@@ -365,7 +365,7 @@ func _reset_player():
 		if not is_multiplayer_authority():
 			return
 
-	print("Resetting player :(")
+	Globals.print_role("Resetting player :(")
 
 	hearth = Max_Hearth
 	body_temperature = 37
@@ -380,4 +380,4 @@ func _reset_player():
 	IsOnFire = false
 
 
-	print("Finish Resetting player :D")
+	Globals.print_role("Finish Resetting player :D")

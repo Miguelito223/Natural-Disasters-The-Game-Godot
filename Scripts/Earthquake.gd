@@ -56,7 +56,7 @@ func do_physics():
 	
 	# Si no podemos hacer física en este momento o la magnitud es menor que 3, no hacemos nada
 	if mag < 3:
-		print("Nuh uh")
+		Globals.print_role("Nuh uh")
 		return
 	
 	var vec = (mag * 25) * Vector3(randi_range(-15, 15) / 10,  randi_range(-5, 4) / 10, randi_range(-15, 15) / 10)
@@ -201,7 +201,7 @@ func process_magnitude():
 	var mag = magnitude * magnitude_modifier
 	
 	if mag >= 0 and mag < 1:
-		print("nuh uh, very low")
+		Globals.print_role("nuh uh, very low")
 	elif mag >= 1 and mag < 2:
 		magnitude_one()
 	elif mag >= 2 and mag < 3:
@@ -227,7 +227,7 @@ func process_magnitude():
 	elif mag >= 12 and mag < 13:
 		magnitude_twelve()
 	else:
-		print("nuh uh")
+		Globals.print_role("nuh uh")
 
 func magnitude_one():
 	var percentage = clamp(magnitude / 1.99, 0, 1)

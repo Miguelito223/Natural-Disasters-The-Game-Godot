@@ -62,6 +62,21 @@ func _ready():
 	$Settings/Time.value = Globals.GlobalsData.timer_disasters
 	$Settings/quality.selected = Globals.GlobalsData.quality
 
+	if OS.has_feature("dedicated_server") or "s" in OS.get_cmdline_user_args() or "server" in OS.get_cmdline_user_args():
+		var args = OS.get_cmdline_user_args()
+		for arg in args:
+			var key_value = arg.rsplit("=")
+			match key_value[0]:
+				"port":
+					Globals.port = key_value[1].to_int()
+
+		Globals.print_role("port:" + Globals.port)
+		Globals.print_role("ip:" + IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1))
+		
+		await get_tree().create_timer(2).timeout
+
+		Globals.hostwithport(Globals.port)
+
 func _process(_delta):
 	if self.visible:
 		await $Music.finished
