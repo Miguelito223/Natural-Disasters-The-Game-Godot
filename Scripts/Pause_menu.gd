@@ -186,24 +186,19 @@ func _process(_delta):
 
 
 func _on_time_value_changed(value):
-	if not Globals.is_networking:
-		Globals.GlobalsData.timer_disasters = value
-		Globals.timer.stop()
-		Globals.timer.wait_time = Globals.GlobalsData.timer_disasters
-		Globals.timer.start()
-		Globals.GlobalsData.save_file()
-	else:
+	if Globals.is_networking:
 		if not multiplayer.is_server():
 			return
 
-		if not Globals.started:
-			return
+	if not Globals.started:
+		return
 		
-		Globals.GlobalsData.timer_disasters = value
-		Globals.timer.stop()
-		Globals.timer.wait_time = Globals.GlobalsData.timer_disasters
-		Globals.timer.start()
-		Globals.GlobalsData.save_file()
+	Globals.GlobalsData.timer_disasters = value
+	Globals.GlobalsData.save_file()
+	Globals.timer.stop()
+	Globals.timer.wait_time = value
+	Globals.timer.start()
+	
 		
 func _on_volumen_value_changed(value:float):
 	Globals.GlobalsData.volumen = value
