@@ -116,7 +116,7 @@ func _on_exit_pressed():
 		multiplayer.multiplayer_peer.close()
 	else:
 		get_tree().paused = false
-		LoadScene.load_scene(Globals.map, "res://Scenes/Main Menu.tscn")
+		LoadScene.load_scene(Globals.map, "res://Scenes/main_menu.tscn")
 		
 func _exit_tree() -> void:
 	Globals.Temperature_target = Globals.Temperature_original
