@@ -256,6 +256,8 @@ shadow_enabled = true
 omni_range = 363.787
 
 [node name="Volcano_Area" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Volcano_Area"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 293.014, 0)

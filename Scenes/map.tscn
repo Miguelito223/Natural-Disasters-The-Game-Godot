@@ -191,7 +191,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1201.83, 9.32904, 996.233)
 gizmo_extents = 2.9
 
 [node name="Hause" parent="." instance=ExtResource("11_8ni8s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1184.2, 1.30695, 1012.02)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1184.2, 1.44768, 1012.02)
 
 [node name="Chat" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -319,6 +319,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4095.09)
 shape = SubResource("BoxShape3D_t040d")
 
 [connection signal="pressed" from="Chat/Button" to="Chat" method="_on_button_pressed"]
-
-[editable path="Hause"]
-[editable path="Hause/hause"]
