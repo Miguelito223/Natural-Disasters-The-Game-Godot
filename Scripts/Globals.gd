@@ -372,12 +372,14 @@ func joinwithip(ip_str, port_int):
 
 func server_fail():
 	print_role("client disconected: failed to load")
+	get_tree().paused = false
 	is_networking = false
 	sync_player_list()
 	LoadScene.load_scene(map, "res://Scenes/main_menu.tscn")
 	
 func server_disconect():
 	print_role("client disconected")
+	get_tree().paused = false
 	is_networking = false
 	sync_player_list()
 	LoadScene.load_scene(map, "res://Scenes/main_menu.tscn")
