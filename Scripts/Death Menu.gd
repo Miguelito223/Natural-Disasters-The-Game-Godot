@@ -19,4 +19,5 @@ func _on_exit_pressed():
 	if Globals.is_networking:
 		multiplayer.multiplayer_peer.close()
 	else:
+		get_tree().paused = false
 		LoadScene.load_scene(Globals.map, "res://Scenes/main_menu.tscn")

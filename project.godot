@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Natural Disasters Survival The Game"
-config/version="1.0.1"
+config/version="1.0.2"
 run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/show_image=false
@@ -43,13 +43,20 @@ window/handheld/orientation=4
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GPTIntegration/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg")
+enabled=PackedStringArray("res://addons/GPTIntegration/plugin.cfg", "res://addons/destruction/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg")
 
 [global_group]
 
 movable_objects=""
-wind_effected_objects=""
 player=""
+Meteor=""
+Volcano=""
+Tsunami=""
+Earthquake=""
+Hause=""
+Destrollable=""
+Tornado=""
+Thunder=""
 
 [importer_defaults]
 
@@ -213,6 +220,10 @@ Remove={
 limits/tcp/connect_timeout_seconds=60
 limits/packet_peer_stream/max_buffer_po2=64
 limits/webrtc/max_channel_in_buffer_kb=100
+
+[physics]
+
+3d/default_gravity=50.0
 
 [rendering]
 

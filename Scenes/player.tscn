@@ -1089,6 +1089,33 @@ properties/23/replication_mode = 1
 properties/24/path = NodePath("AnimationTree:parameters/conditions/is_swiming")
 properties/24/spawn = true
 properties/24/replication_mode = 1
+properties/25/path = NodePath("head:position")
+properties/25/spawn = true
+properties/25/replication_mode = 1
+properties/26/path = NodePath("head:rotation")
+properties/26/spawn = true
+properties/26/replication_mode = 1
+properties/27/path = NodePath("head:scale")
+properties/27/spawn = true
+properties/27/replication_mode = 1
+properties/28/path = NodePath("head/Camera3D:position")
+properties/28/spawn = true
+properties/28/replication_mode = 1
+properties/29/path = NodePath("head/Camera3D:rotation")
+properties/29/spawn = true
+properties/29/replication_mode = 1
+properties/30/path = NodePath("head/Camera3D:scale")
+properties/30/spawn = true
+properties/30/replication_mode = 1
+properties/31/path = NodePath("Esqueleto:position")
+properties/31/spawn = true
+properties/31/replication_mode = 1
+properties/32/path = NodePath("Esqueleto:rotation")
+properties/32/spawn = true
+properties/32/replication_mode = 1
+properties/33/path = NodePath("Esqueleto:scale")
+properties/33/spawn = true
+properties/33/replication_mode = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tl0tp"]
 shader = ExtResource("7_787g2")
@@ -1108,7 +1135,7 @@ shader_parameter/frequency = 1.0
 shader_parameter/speed = 1.0
 shader_parameter/Shader_color = Color(1, 0.352941, 0.113725, 1)
 
-[node name="Player" type="CharacterBody3D" groups=["movable_objects", "player", "wind_effected_objects"]]
+[node name="Player" type="CharacterBody3D" groups=["movable_objects", "player"]]
 collision_layer = 13
 collision_mask = 13
 script = ExtResource("1_btpoi")
@@ -1208,7 +1235,7 @@ bones/4/parent = 3
 bones/4/rest = Transform3D(1, -0.000138256, 1.37828e-07, 0.000138199, 0.999618, 0.027635, -3.95847e-06, -0.027635, 0.999618, -6.4719e-17, 0.766354, -4.28408e-08)
 bones/4/enabled = true
 bones/4/position = Vector3(-6.4719e-17, 0.766354, -4.28408e-08)
-bones/4/rotation = Quaternion(0.630362, -0.181829, 0.167153, 0.735963)
+bones/4/rotation = Quaternion(0.635016, 0.159775, -0.14686, 0.74139)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/name = "brazo_inferior.d"
 bones/5/parent = 4
@@ -1229,7 +1256,7 @@ bones/7/parent = 6
 bones/7/rest = Transform3D(1, -2.40698e-19, 5.55226e-17, 1.22943e-18, 0.999841, -0.0178084, -5.55095e-17, 0.0178084, 0.999841, -3.88342e-17, 0.721442, 5.58794e-08)
 bones/7/enabled = true
 bones/7/position = Vector3(-3.88342e-17, 0.721442, 5.58794e-08)
-bones/7/rotation = Quaternion(-0.62536, -0.163178, -0.145037, 0.749174)
+bones/7/rotation = Quaternion(-0.627676, 0.150593, 0.133851, 0.751949)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/name = "brazo_inferior.i"
 bones/8/parent = 7
@@ -1257,14 +1284,14 @@ bones/11/parent = 10
 bones/11/rest = Transform3D(-0.999974, -0.00436537, 0.00581706, -0.00592073, 0.0241228, -0.999691, 0.0042237, -0.999699, -0.024148, 1.27966e-10, 0.384886, 4.17949e-08)
 bones/11/enabled = true
 bones/11/position = Vector3(1.27966e-10, 0.384886, 4.17949e-08)
-bones/11/rotation = Quaternion(-0.136725, 0.701799, -0.686952, -0.129928)
+bones/11/rotation = Quaternion(0.233923, 0.677146, -0.657624, 0.232992)
 bones/11/scale = Vector3(1, 1, 1)
 bones/12/name = "pierna_inferior.d"
 bones/12/parent = 11
 bones/12/rest = Transform3D(0.999643, -0.0189994, -0.01878, 0.0187942, 0.999762, -0.0110474, 0.0189855, 0.0106905, 0.999763, -1.04774e-09, 2.12904, -1.33368e-08)
 bones/12/enabled = true
 bones/12/position = Vector3(-1.04774e-09, 2.12904, -1.33368e-08)
-bones/12/rotation = Quaternion(0.00511262, -0.00965265, -0.0520291, 0.998586)
+bones/12/rotation = Quaternion(0.00468173, -0.00961055, -0.128307, 0.991677)
 bones/12/scale = Vector3(1, 1, 1)
 bones/13/name = "cadera.i"
 bones/13/parent = 0
@@ -1278,14 +1305,14 @@ bones/14/parent = 13
 bones/14/rest = Transform3D(0.998807, -0.0246589, -0.0421602, 0.0422196, 0.00189155, 0.999107, -0.0245572, -0.999694, 0.0029304, 5.90433e-10, 0.327296, 4.71613e-08)
 bones/14/enabled = true
 bones/14/position = Vector3(5.90433e-10, 0.327296, 4.71613e-08)
-bones/14/rotation = Quaternion(-0.697057, 0.0936168, 0.126369, 0.699556)
+bones/14/rotation = Quaternion(-0.693706, -0.144195, -0.151501, 0.689222)
 bones/14/scale = Vector3(1, 1, 1)
 bones/15/name = "pierna_inferior.i"
 bones/15/parent = 14
 bones/15/rest = Transform3D(0.998071, 0.0449051, 0.0428617, -0.0432015, 0.99827, -0.0398786, -0.0445783, 0.03795, 0.998285, -4.19095e-09, 2.16872, -9.31323e-09)
 bones/15/enabled = true
 bones/15/position = Vector3(-4.19095e-09, 2.16872, -9.31323e-09)
-bones/15/rotation = Quaternion(0.0191329, 0.0213175, -0.113831, 0.993087)
+bones/15/rotation = Quaternion(0.0226754, 0.0183039, -0.121331, 0.992184)
 bones/15/scale = Vector3(1, 1, 1)
 
 [node name="Brazos" type="MeshInstance3D" parent="Esqueleto/Skeleton3D"]
@@ -1318,7 +1345,7 @@ parameters/conditions/is_swiming = false
 parameters/conditions/is_walking = true
 
 [node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35376, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35376, -1)
 layers = 1048575
 size = Vector3(2048, 2048, 2048)
 resolution = 5
@@ -1680,7 +1707,6 @@ theme = ExtResource("16_igrcy")
 [node name="SpawnMenu" type="CanvasLayer" parent="."]
 process_mode = 3
 layer = 2
-visible = false
 script = ExtResource("19_hx71c")
 
 [node name="Panel" type="Panel" parent="SpawnMenu"]
@@ -1696,17 +1722,11 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("16_igrcy")
 
-[node name="grid" type="GridContainer" parent="SpawnMenu/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("16_igrcy")
-theme_override_constants/h_separation = 100
-theme_override_constants/v_separation = 100
-columns = 5
+[node name="GridContainer" type="GridContainer" parent="SpawnMenu/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 3
 
 [node name="Hud" type="CanvasLayer" parent="."]
 process_mode = 3

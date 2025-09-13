@@ -2,6 +2,7 @@ extends StaticBody3D
 
 @onready var door = $hause/Room/Pivot
 @onready var door_collision_shape = $DoorCollision
+@onready var destruction = $Destruction
 @onready var door_frame_collision_shape = $DoorFrameCollision
 @export var door_open_sound: AudioStreamPlayer3D
 @export var door_close_sound: AudioStreamPlayer3D
@@ -40,3 +41,13 @@ func Interact():
 			open_door()
 		else:
 			close_door()	
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body.is_in_group("Meteor") or body.is_in_group("Tsunami"):
+		destruction.destroy()
+
+
+func _on_area_3d_area_entered(area: Area3D) -> void:
+	if area.is_in_group("Tornado"):
+		destruction.destroy()

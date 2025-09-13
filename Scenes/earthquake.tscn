@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://bpdx6h6i6fbdh" path="res://Sounds/disasters/earthquake/earthquake_strong.wav" id="4_t4mnf"]
 [ext_resource type="AudioStream" uid="uid://12klee0ckh01" path="res://Sounds/disasters/nature/earthquake_aftershock.mp3" id="5_2v7mq"]
 
-[node name="Earthquake" type="Node3D"]
+[node name="Earthquake" type="Node3D" groups=["Earthquake"]]
 script = ExtResource("1_we2cb")
 
 [node name="earquake_sound" type="AudioStreamPlayer" parent="."]

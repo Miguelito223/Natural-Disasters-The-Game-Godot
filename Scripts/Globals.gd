@@ -173,7 +173,7 @@ func vec2_to_vec3(vector):
 
 func is_something_blocking_wind(entity):
 	var start_pos = entity.global_position
-	var end_pos = start_pos + (Wind_Direction * 300)
+	var end_pos = start_pos - (Wind_Direction * 300)
 	var space_state = entity.get_world_3d().direct_space_state
 	var ray = PhysicsRayQueryParameters3D.create(start_pos, end_pos)
 	ray.exclude = [entity.get_rid()]
@@ -247,58 +247,38 @@ func find_in_sphere(origin: Vector3, radius: float) -> Array:
 func wind(object):
 	# Verificar si el objeto es un jugador
 	if object.is_in_group("player"):
-		var is_outdoor = is_outdoor(object)
-		var is_something_blocking_wind = is_something_blocking_wind(object)
-		var hit_left = perform_trace_wind(object, Vector3(1, 0, 0))
-		var hit_right = perform_trace_wind(object, Vector3(-1, 0, 0))
-		var hit_forward = perform_trace_wind(object, Vector3(0, 0, 1))
-		var hit_behind = perform_trace_wind(object, Vector3(0, 0,-1))
-		
-		var distance_left_right = hit_left.distance_to(hit_right)
-		var distance_forward_behind = hit_forward.distance_to(hit_behind)
-		
-		var area = distance_left_right * distance_forward_behind / 2
-		var area_percentage = clamp(area / 100, 0, 1)
-		
+		if not is_instance_valid(object):
+			return
+	
 		# Calcular la velocidad del viento local
-		var local_wind = area_percentage * Wind_speed
-		if not is_outdoor or is_something_blocking_wind:
+		var local_wind = Wind_speed
+		if not is_outdoor(object) or is_something_blocking_wind(object):
 			local_wind = 0
 
 		object.body_wind = local_wind
 		
 		# Calcular la velocidad del viento y la fricción
-		var wind_vel = convert_MetoSU(convert_KMPHtoMe((clamp(((clamp(local_wind / 256, 0, 1) * 5) ** 2) * local_wind, 0, local_wind) / 2.9225))) * Wind_Direction
-		var frictional_scalar = clamp(wind_vel.length(), -400, 400)
-		var frictional_velocity = frictional_scalar * -wind_vel.normalized()
-		var wind_vel_new = (wind_vel + frictional_velocity) * 0.5
-
+		var wind_vel = Wind_Direction * local_wind 
 		# Verificar si está al aire libre y no hay obstáculos que bloqueen el viento
-		if is_outdoor and not is_something_blocking_wind:
-			var delta_velocity = (object.get_velocity() - wind_vel_new) - object.get_velocity()
-			
-			if delta_velocity.length() != 0:
-				object.set_velocity(delta_velocity * 0.3)
+		if is_outdoor(object) and not is_something_blocking_wind(object):
+			var delta_velocity = wind_vel - object.velocity
+			object.velocity += delta_velocity * 0.3
+
 	elif object.is_in_group("movable_objects") and object.is_class("RigidBody3D"):
-		var is_outdoor = is_outdoor(object)
-		var is_something_blocking_wind = is_something_blocking_wind(object)
-		if is_outdoor and not is_something_blocking_wind:
-			var area = Area(object)
-			var mass = object.mass
+		if is_outdoor(object) and not is_something_blocking_wind(object) and is_instance_valid(object):
+			var wind_vel = Wind_Direction * Wind_speed 
+			var delta_velocity = wind_vel - object.linear_velocity
 
-			var force_mul_area = clamp((area / 680827), 0, 1) # bigger the area >> higher the f multiplier is
-			var friction_mul = clamp((mass / 50000), 0, 1) # lower the mass  >> lower frictional force 
-			var avrg_mul = (force_mul_area + friction_mul) / 2 
-			
-			var wind_vel = convert_MetoSU(convert_KMPHtoMe(Wind_speed / 2.9225)) * Wind_Direction
-			var frictional_scalar = clamp(wind_vel.length(), 0, mass)
-			var frictional_velocity = frictional_scalar * -wind_vel.normalized()
-			var wind_vel_new = (wind_vel + frictional_velocity) * -1
-			
-			var windvel_cap = wind_vel_new.length() - object.get_linear_velocity().length()
+			object.linear_velocity = delta_velocity * 0.3
 
-			if windvel_cap > 0:
-				object.add_constant_central_force(wind_vel_new * avrg_mul) 
+	elif object.is_in_group("movable_objects") and object.is_class("StaticBody3D"):
+		if is_instance_valid(object):
+			if object.is_in_group("Destrollable") or object.is_in_group("Hause"):
+				if Wind_speed > 100:
+					object.destruction.destroy()
+			
+			
+
 
 func Area(entity):
 	if not "bounding_radius_area" in entity or entity.bounding_radius_area == null:

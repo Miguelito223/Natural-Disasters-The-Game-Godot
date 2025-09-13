@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdx02sb4y5ufy"]
+
+[ext_resource type="PackedScene" uid="uid://c6xgmy3mkckea" path="res://Scenes/meteors.tscn" id="1_kb3fv"]
+
+[node name="meteor_icon" type="SubViewport"]
+size = Vector2i(128, 128)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.964174, 0, 0.26527, 0, 1, 0, -0.26527, 0, -0.964174, 2.68808, 0, -9.15405)
+
+[node name="Meteor" parent="." instance=ExtResource("1_kb3fv")]

@@ -135,14 +135,24 @@ func do_physics():
 				if randi_range(1, 2) == 1:
 					v.apply_impulse(ang_v * 40)
 					unfreeze(v, mag)
-
+		elif v.get_class() == "StaticBody3D":
+			if randi_range(1,2) == 1:
+				destroy(v)
 	
-func unfreeze(v, mag):
+func unfreeze(v, _mag):
 	if randi_range(1, 1024 - (25.6 * magnitude)) == 1:
-		v.freeze = false
+		if is_instance_valid(v):
+			v.freeze = false
 	if randi_range(1, 512 - (25.6 * magnitude)) == 1:
-		v.sleeping = false
-		v.freeze = false
+		if is_instance_valid(v):
+			v.sleeping = false
+			v.freeze = false
+			destroy(v)
+
+func destroy(v):
+	if v.is_in_group("Destrollable") or v.is_in_group("Hause"):
+		if is_instance_valid(v):
+			v.destruction.destroy()
 
 func magnitude_modulate_sound():
 	var volume = self.magnitude  # Asumiendo que self.magnitude es una propiedad que representa la magnitud del terremoto

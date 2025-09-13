@@ -8,7 +8,7 @@ var SPEED = 0
 
 const SPEED_RUN = 25.0
 const SPEED_WALK = 15.0
-const JUMP_VELOCITY = 7.0
+const JUMP_VELOCITY =  14.0
 const SENSIBILITY = 0.02
 const LERP_VAL =  .15
 
@@ -65,7 +65,7 @@ var min_bdradiation = 0
 @onready var label = $Name
 @onready var temp_effect = $Temp_Effect/ColorRect
 
-@onready var interactor = $head/Camera3D/Interactor
+@onready var interactor: RayCast3D = $head/Camera3D/Interactor
 
 
 func _enter_tree():
@@ -289,7 +289,7 @@ func _physics_process(delta):
 			velocity.y = JUMP_VELOCITY
 
 		if IsInWater or IsInLava:
-			velocity.y += JUMP_VELOCITY
+			velocity.y = JUMP_VELOCITY
 			
 	
 
@@ -331,8 +331,6 @@ func _physics_process(delta):
 	if interactor.is_colliding():
 		var target = interactor.get_collider()
 		if target != null and target.has_method("Interact"):
-			Globals.print_role("Press e to interact")
-
 			if Input.is_action_just_pressed("Interact"):
 				target.Interact()
 		

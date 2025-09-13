@@ -193,7 +193,7 @@ properties/5/replication_mode = 1
 [sub_resource type="SphereShape3D" id="SphereShape3D_lhoig"]
 radius = 40.4438
 
-[node name="Volcano" type="StaticBody3D"]
+[node name="Volcano" type="StaticBody3D" groups=["Volcano"]]
 script = ExtResource("1_m5bkw")
 
 [node name="Smoke" type="GPUParticles3D" parent="."]

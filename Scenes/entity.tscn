@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://rc1qao5f1s2s"]
+
+[ext_resource type="Texture2D" uid="uid://decohak1f44nw" path="res://Icons/hause_icon.png" id="1_hsfu5"]
+
+[node name="Entity" type="VBoxContainer"]
+
+[node name="Icon" type="TextureButton" parent="."]
+layout_mode = 2
+texture_normal = ExtResource("1_hsfu5")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Hause"

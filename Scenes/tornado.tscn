@@ -71,7 +71,7 @@ properties/2/path = NodePath(".:scale")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="Tornado" type="Node3D"]
+[node name="Tornado" type="Node3D" groups=["Tornado"]]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 script = ExtResource("1_yllgf")
 

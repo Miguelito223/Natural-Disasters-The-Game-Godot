@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://hiq4h8n7r78k" path="res://Scenes/Hause.tscn" id="1_0ct46"]
 
 [node name="hause_icon" type="SubViewport"]
+size = Vector2i(128, 128)
 render_target_update_mode = 4
 
 [node name="Hause" parent="." instance=ExtResource("1_0ct46")]

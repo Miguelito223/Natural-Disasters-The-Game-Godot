@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/Breakable hause.blend-08599cb14dd3d1b0d027cd7
 
 [params]
 
-nodes/root_type=""
+nodes/root_type="RigidBody3D"
 nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -32,7 +32,19 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={}
+_subresources={
+"nodes": {
+"PATH:Handle_Back_cell_113": {
+"import/skip_import": true
+},
+"PATH:Handle_Front_cell_062": {
+"import/skip_import": true
+},
+"PATH:Handle_Front_cell_110": {
+"import/skip_import": true
+}
+}
+}
 blender/nodes/visible=0
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true

@@ -20,18 +20,21 @@ properties/2/path = NodePath(".:scale")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="tsunami" type="CharacterBody3D"]
+[node name="tsunami" type="CharacterBody3D" groups=["Tsunami"]]
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_6j28r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.00482, 0, 0, 0, 1.00482, 0, 0, 0, 1.00482, -1.5836, -4.69926, -4.29318)
+transform = Transform3D(45.873, 0, 0, 0, 14.771, 0, 0, 0, 10, 0, 0, 0)
 shape = SubResource("BoxShape3D_6j28r")
+disabled = true
 
 [node name="tsunami" parent="." instance=ExtResource("2_khnsg")]
+transform = Transform3D(-45.873, 0, -8.74228e-07, 0, 14.771, 0, 4.01034e-06, 0, -10, 0, 0, 0)
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." groups=["Tsunami"]]
+transform = Transform3D(-0.999924, 0, 0.0123392, 0, 1, 0, -0.0123392, 0, -0.999924, 0, 0, 0)
 collision_layer = 4
 collision_mask = 4
 

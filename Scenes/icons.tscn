@@ -1,10 +1,51 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtvwojq6fi0t3"]
+[gd_scene load_steps=7 format=3 uid="uid://dtvwojq6fi0t3"]
 
 [ext_resource type="Script" uid="uid://b2mphc12crvb1" path="res://Scripts/icons.gd" id="1_i50jd"]
 [ext_resource type="PackedScene" uid="uid://d3nqv2bmoyl5d" path="res://Scenes/hause_icon.tscn" id="1_pr3mh"]
+[ext_resource type="PackedScene" uid="uid://cdx02sb4y5ufy" path="res://Scenes/meteor_icon.tscn" id="3_r5dmu"]
+[ext_resource type="PackedScene" uid="uid://bee1orklhwhkv" path="res://Scenes/volcano_icon.tscn" id="4_mq4qj"]
+[ext_resource type="PackedScene" uid="uid://do2ex857ey0an" path="res://Scenes/tsunami_icon.tscn" id="5_3a1ay"]
+[ext_resource type="PackedScene" uid="uid://cyak6rqj5y661" path="res://Scenes/tornado_icon.tscn" id="6_x88sg"]
 
 [node name="icons" type="Node"]
 script = ExtResource("1_i50jd")
 
+[node name="volcano_icon" parent="." instance=ExtResource("4_mq4qj")]
+
+[node name="Volcano" parent="volcano_icon" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2755.23, 0, -5033.24)
+
+[node name="Camera3D" parent="volcano_icon" index="1"]
+transform = Transform3D(-0.964174, 0, 0.26527, 0, 1, 0, -0.26527, 0, -0.964174, -2513.32, 224.774, -5729.69)
+
+[node name="tornado_icon" parent="." instance=ExtResource("6_x88sg")]
+
+[node name="Tornado" parent="tornado_icon" index="0"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 3243.93)
+
+[node name="Camera3D" parent="tornado_icon" index="1"]
+transform = Transform3D(-0.964174, 0, 0.26527, 0, 1, 0, -0.26527, 0, -0.964174, 64.8581, 64.32, 3114.65)
+
+[node name="tsunami_icon" parent="." instance=ExtResource("5_3a1ay")]
+
+[node name="tsunami" parent="tsunami_icon" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12391.4, 0, -3570.97)
+
+[node name="Camera3D" parent="tsunami_icon" index="1"]
+transform = Transform3D(-0.964174, 0, 0.26527, 0, 1, 0, -0.26527, 0, -0.964174, 12633.3, 224.774, -5246.8)
+
+[node name="meteor_icon" parent="." instance=ExtResource("3_r5dmu")]
+
+[node name="Camera3D" parent="meteor_icon" index="0"]
+transform = Transform3D(-0.964174, 0, 0.26527, 0, 1, 0, -0.26527, 0, -0.964174, -121.119, 1456.25, 1387.67)
+
+[node name="Meteor" parent="meteor_icon" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -123.807, 1456.25, 1396.83)
+
 [node name="hause_icon" parent="." instance=ExtResource("1_pr3mh")]
-size = Vector2i(256, 256)
+
+[editable path="volcano_icon"]
+[editable path="tornado_icon"]
+[editable path="tsunami_icon"]
+[editable path="meteor_icon"]
+[editable path="hause_icon"]

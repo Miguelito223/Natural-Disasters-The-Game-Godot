@@ -24,7 +24,7 @@ func _physics_process(delta):
 			body.freeze = false
 		elif body.is_in_group("player"):
 			if not body.is_on_floor():
-				body.velocity = self.velocity
+				body.velocity = direction * speed * delta
 
 	move_and_slide()
 

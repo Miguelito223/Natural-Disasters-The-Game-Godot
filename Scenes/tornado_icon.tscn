@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyak6rqj5y661"]
+
+[ext_resource type="PackedScene" uid="uid://tjhhsh3ck07n" path="res://Scenes/tornado.tscn" id="1_w7r6k"]
+
+[node name="tornado_icon" type="SubViewport"]
+size = Vector2i(128, 128)
+render_target_update_mode = 4
+
+[node name="Tornado" parent="." instance=ExtResource("1_w7r6k")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.964174, 0, 0.26527, 0, 1, 0, -0.26527, 0, -0.964174, 64.8581, 64.32, -129.274)
